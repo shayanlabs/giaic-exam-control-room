@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GIAIC Final Exam — Control Room</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --bg:#14171c; --bg-soft:#181c23; --surface:#1e232c; --surface-2:#262c38;
+    --border:#313a48; --border-soft:#242b36;
+    --text:#eae7de; --text-dim:#9aa2af; --text-faint:#5c6472;
+    --gold:#d9a441; --gold-soft:#332a19;
+    --teal:#4fb3a3; --teal-soft:#17262c;
+    --slate:#8a94a6; --slate-soft:#20242c;
+    --brick:#c1603f; --brick-soft:#2c1f1a;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased;
+    padding:28px 20px 60px;
+  }
+  .wrap{max-width:1180px; margin:0 auto;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--gold); margin:0 0 6px;
+  }
+  h1{
+    font-family:'IBM Plex Mono',monospace; font-size:clamp(22px,4vw,32px);
+    margin:0 0 4px; font-weight:700; letter-spacing:-.01em;
+  }
+  .sub{color:var(--text-dim); font-size:14.5px; margin:0 0 22px; max-width:640px; line-height:1.5;}
+
+  /* ---- station strip ---- */
+  .stations{display:flex; gap:0; margin-bottom:26px; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden;}
+  .station{flex:1; padding:14px 16px; background:var(--surface); position:relative; border-right:1px solid var(--border);}
+  .station:last-child{border-right:none;}
+  .station.active{background:linear-gradient(180deg,var(--gold-soft),var(--surface));}
+  .station.active::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--gold);}
+  .station .st-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-faint);}
+  .station.active .st-label{color:var(--gold);}
+  .station .st-name{font-weight:700; font-size:14.5px; margin:3px 0 2px;}
+  .station .st-date{font-size:12px; color:var(--text-dim);}
+  .station .pulse{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--gold); margin-left:6px; box-shadow:0 0 0 0 rgba(217,164,65,.6); animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(217,164,65,.55);}70%{box-shadow:0 0 0 8px rgba(217,164,65,0);}100%{box-shadow:0 0 0 0 rgba(217,164,65,0);}}
+
+  /* ---- stats + filters ---- */
+  .toolbar{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .progress-pill{display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--text-dim);}
+  .bar{width:140px; height:7px; background:var(--surface-2); border-radius:5px; overflow:hidden; border:1px solid var(--border);}
+  .bar-fill{height:100%; background:linear-gradient(90deg,var(--gold),var(--teal)); transition:width .4s ease;}
+  .filters{display:flex; gap:6px; flex-wrap:wrap;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:6px 12px; border-radius:999px;
+    border:1px solid var(--border); background:var(--surface); color:var(--text-dim); cursor:pointer; user-select:none;
+    transition:all .15s ease;
+  }
+  .chip:hover{border-color:var(--text-faint);}
+  .chip.active{color:var(--bg); font-weight:700;}
+  .chip[data-f="all"].active{background:var(--text); border-color:var(--text);}
+  .chip[data-f="must"].active{background:var(--gold); border-color:var(--gold);}
+  .chip[data-f="should"].active{background:var(--teal); border-color:var(--teal);}
+  .chip[data-f="could"].active{background:var(--slate); border-color:var(--slate);}
+
+  /* ---- board ---- */
+  .board{display:flex; gap:14px; overflow-x:auto; padding-bottom:10px; margin-bottom:8px;}
+  .col{flex:0 0 250px; background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:var(--radius); padding:12px;}
+  .col-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; padding:0 2px;}
+  .col-title{font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-dim);}
+  .col-count{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-faint); background:var(--surface-2); padding:1px 7px; border-radius:999px;}
+  .cards{display:flex; flex-direction:column; gap:8px; min-height:40px;}
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--slate);
+    border-radius:8px; padding:10px 11px; font-size:13px; line-height:1.4;
+  }
+  .card.pri-must{border-left-color:var(--gold);}
+  .card.pri-should{border-left-color:var(--teal);}
+  .card.pri-could{border-left-color:var(--slate);}
+  .card .mod{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--text-faint); margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;}
+  .wk{font-size:9.5px; background:var(--surface-2); padding:1px 6px; border-radius:5px; color:var(--text-dim);}
+  .card .title{color:var(--text); margin-bottom:8px;}
+  .card .row{display:flex; align-items:center; justify-content:space-between; gap:6px;}
+  .movebtns{display:flex; gap:4px;}
+  .mbtn{
+    background:var(--surface-2); border:1px solid var(--border); color:var(--text-dim);
+    font-size:12px; width:22px; height:22px; border-radius:5px; cursor:pointer; line-height:1;
+  }
+  .mbtn:hover{color:var(--text); border-color:var(--text-faint);}
+  .mbtn:disabled{opacity:.25; cursor:default;}
+  .open-link{font-size:11px; color:var(--gold); text-decoration:none; font-family:'IBM Plex Mono',monospace;}
+  .open-link:hover{text-decoration:underline;}
+  .empty-hint{color:var(--text-faint); font-size:11.5px; padding:6px 2px; font-style:italic;}
+
+  /* ---- lower sections ---- */
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:30px;}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr;}}
+  .panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px;}
+  .panel h2{font-family:'IBM Plex Mono',monospace; font-size:14px; margin:0 0 12px; color:var(--text);}
+  .moscow-row{display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-top:1px solid var(--border-soft);}
+  .moscow-row:first-of-type{border-top:none;}
+  .dot{width:10px; height:10px; border-radius:3px; margin-top:3px; flex:none;}
+  .moscow-row b{font-size:13px;}
+  .moscow-row p{margin:2px 0 0; font-size:12.5px; color:var(--text-dim); line-height:1.45;}
+
+  .eisen{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:8px;}
+  .eq{border-radius:8px; padding:10px 12px; font-size:12px; line-height:1.5;}
+  .eq b{display:block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; margin-bottom:4px;}
+  .eq.q1{background:var(--brick-soft); border:1px solid #4a2e24;}
+  .eq.q1 b{color:var(--brick);}
+  .eq.q2{background:var(--teal-soft); border:1px solid #234641;}
+  .eq.q2 b{color:var(--teal);}
+  .eq.q3{background:var(--gold-soft); border:1px solid #4a3c22;}
+  .eq.q3 b{color:var(--gold);}
+  .eq.q4{background:var(--slate-soft); border:1px solid #363d49;}
+  .eq.q4 b{color:var(--slate);}
+  .eq span{color:var(--text-dim);}
+
+  footer{margin-top:26px; font-size:12px; color:var(--text-faint); line-height:1.6; border-top:1px solid var(--border-soft); padding-top:16px;}
+  footer b{color:var(--text-dim);}
+  .reset-btn{margin-top:14px; background:none; border:1px solid var(--border); color:var(--text-faint); font-family:'IBM Plex Mono',monospace; font-size:11px; padding:5px 10px; border-radius:6px; cursor:pointer;}
+  .reset-btn:hover{color:var(--brick); border-color:var(--brick);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">P3-FDEAGA · FDE–Agent Factory Model &amp; Advanced General Agents</p>
+  <h1>Exam Control Room</h1>
+  <p class="sub">Aapka poora prep roadmap ek hi board par — Kanban se track karo, MoSCoW se priority set karo, Eisenhower se roz ka time decide karo. Progress is browser mein save hoti rahegi.</p>
+
+  <div class="stations" id="stations"></div>
+
+  <div class="toolbar">
+    <div class="progress-pill">
+      <span id="progressText">0 / 17 mastered</span>
+      <div class="bar"><div class="bar-fill" id="barFill" style="width:0%"></div></div>
+    </div>
+    <div class="filters" id="filters">
+      <span class="chip active" data-f="all">All</span>
+      <span class="chip" data-f="must">Must</span>
+      <span class="chip" data-f="should">Should</span>
+      <span class="chip" data-f="could">Could</span>
+    </div>
+  </div>
+
+  <div class="board" id="board"></div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h2>MoSCoW — priority key</h2>
+      <div class="moscow-row"><div class="dot" style="background:var(--gold)"></div><div><b>Must</b><p>Loop Engineering, Harness Engineering, Evals, Runtime (Leaving the Laptop) + Roles. Ye 5 sub-topics sab se dense hain (12–15 concepts each) — exam ka bulk yahin se aayega.</p></div></div>
+      <div class="moscow-row"><div class="dot" style="background:var(--teal)"></div><div><b>Should</b><p>Ecosystem aur General Agents on the Web. Vocabulary-heavy — good scoring agar Must topics solid hon.</p></div></div>
+      <div class="moscow-row"><div class="dot" style="background:var(--slate)"></div><div><b>Could</b><p>Local AI: Agentic Coding — chota, hands-on module. Last mein karo agar time bache.</p></div></div>
+      <div class="moscow-row"><div class="dot" style="background:var(--brick)"></div><div><b>Won't (abhi)</b><p>Syllabus se bahar ke book chapters (Mode 2, Python, etc.) — exam sirf un 8 official links tak limited hai, unme mat bhatakna.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <h2>Eisenhower — roz ka time kaise baante</h2>
+      <div class="eisen">
+        <div class="eq q1"><b>Urgent + Important</b>Aaj/kal Must topics ki fresh reading — Loop, Harness, Evals, Runtime. <span>Deep-focus hours yahan.</span></div>
+        <div class="eq q2"><b>Important, not Urgent</b>Flashcards + "Check Yourself" boxes ka spaced revision, mock quiz banana. <span>Schedule karo, skip mat karo.</span></div>
+        <div class="eq q3"><b>Urgent, not Important</b>Zia Tutor AI access check, marathon section (A/B/C) confirm, exam date announcement dekhna. <span>2 min mein nipta do.</span></div>
+        <div class="eq q4"><b>Neither</b>Bonus book chapters, extra YouTube deep-dives. <span>Sirf agar sab kuch green ho.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <b>Kaise use karein:</b> har card ko ‹ › se aage/peeche move karo (Backlog → This Week → In Progress → Self-Test → Mastered). "↗" har module ke exact page/section par le jata hai. Har chapter ke end mein "Check Yourself" boxes aur kai jagah "Test Your Understanding" quiz + Flashcards hain — inhe hi apna informal MCQ practice bana lo, kyunki format bilkul exam jaisa hai.<br>
+    <b>Trello chahiye?</b> Agar aap apna Trello account connect karna chahein, wo option is chat mein alag se aa sakta hai — connect karne ke baad bata dena, main yehi board seedha Trello mein bana dunga.
+    <button class="reset-btn" id="resetBtn">Reset progress</button>
+  </footer>
+</div>
+
+<script>
+const TASKS = [
+  {id:'r1',  title:'Roles This Book Trains — FDE, Outcome Architect, Digital FTE Builder, AI-Native Co. Architect, Cloud AI Eng, Governance/Evals/Supervisor', module:'Roles', priority:'must', week:1, url:'https://agentfactory.panaversity.org/docs/roles-this-book-trains'},
+  {id:'e1',  title:'Ecosystem — System of Record, Zia Tutor/Developer AI, 5-layer FDE AF Model', module:'Ecosystem', priority:'should', week:3, url:'https://agentfactory.panaversity.org/docs/ecosystem'},
+  {id:'l1',  title:'Local AI: Agentic Coding — brain = an address, the two walls, tool calls', module:'Local AI', priority:'could', week:5, url:'https://agentfactory.panaversity.org/docs/local-ai-agentic-coding'},
+  {id:'le1', title:'Loop Engineering I — small vs big loop, the 6 parts of a loop', module:'Loop Eng.', priority:'must', week:1, url:'https://agentfactory.panaversity.org/docs/loop-engineering-crash-course#part-1-the-shift'},
+  {id:'le2', title:'Loop Engineering II — 4 heartbeats, maker–checker, verification skills', module:'Loop Eng.', priority:'must', week:2, url:'https://agentfactory.panaversity.org/docs/loop-engineering-crash-course#part-2-the-heartbeat'},
+  {id:'he1', title:'Harness Engineering I — five verbs, permission rules, sandboxes', module:'Harness', priority:'must', week:2, url:'https://agentfactory.panaversity.org/docs/harness-engineering-crash-course#part-2-constrain'},
+  {id:'he2', title:'Harness Engineering II — hooks, typed output, failure classes & the ratchet', module:'Harness', priority:'must', week:3, url:'https://agentfactory.panaversity.org/docs/harness-engineering-crash-course#part-4-verify-correct'},
+  {id:'tc1', title:'Evals I — test vs eval, the golden set, rubrics & calibrating the judge', module:'Evals', priority:'must', week:3, url:'https://agentfactory.panaversity.org/docs/trusting-the-checker-crash-course#part-2-the-golden-set'},
+  {id:'tc2', title:"Evals II — regression suite, drift, Goodhart's law", module:'Evals', priority:'must', week:4, url:'https://agentfactory.panaversity.org/docs/trusting-the-checker-crash-course#part-4-evals-in-the-loop'},
+  {id:'ll1', title:'Runtime I — the 4 homes, headless bridge, cloud schedule', module:'Runtime', priority:'must', week:4, url:'https://agentfactory.panaversity.org/docs/leaving-the-laptop-crash-course#part-2-headless-is-the-bridge'},
+  {id:'ll2', title:'Runtime II — managed runtime, the 4 questions, lock-in', module:'Runtime', priority:'must', week:5, url:'https://agentfactory.panaversity.org/docs/leaving-the-laptop-crash-course#part-5-choosing-a-home'},
+  {id:'gw1', title:'Web Agents I — remote sessions, the 6-part shape, the 3 file tiers', module:'Web Agents', priority:'should', week:5, url:'https://agentfactory.panaversity.org/docs/general-agents-web-crash-course#part-2-the-surface'},
+  {id:'gw2', title:'Web Agents II — the delegation loop, scheduled tasks', module:'Web Agents', priority:'should', week:6, url:'https://agentfactory.panaversity.org/docs/general-agents-web-crash-course#part-3-working-unwatched'},
+  {id:'p1',  title:'Compile every "Check Yourself" + "Test Your Understanding" Q across all 8 pages into one mock quiz', module:'Practice', priority:'must', week:6, url:''},
+  {id:'p2',  title:'Full timed mock exam — 100 MCQs in 140 minutes, no phone nearby', module:'Practice', priority:'must', week:6, url:''},
+  {id:'p3',  title:'Attend all 3 Marathon weekends with Zia Khan (Aug 15–30) — pick your Section A/B/C', module:'Marathon', priority:'should', week:4, url:''},
+  {id:'p4',  title:'Final flashcard revision pass — all 8 modules, weakest topics twice', module:'Practice', priority:'must', week:6, url:''},
+];
+
+const COLS = ['backlog','thisweek','inprogress','selftest','mastered'];
+const COL_LABEL = {backlog:'Backlog', thisweek:'This Week', inprogress:'In Progress', selftest:'Self-Test', mastered:'Mastered ✅'};
+
+let state = {};
+let activeFilter = 'all';
+
+async function loadState(){
+  try{
+    const res = await window.storage.get('giaic-kanban-state');
+    if(res && res.value) state = JSON.parse(res.value);
+  }catch(e){ state = {}; }
+  TASKS.forEach(t => { if(!state[t.id]) state[t.id] = 'backlog'; });
+}
+async function saveState(){
+  try{ await window.storage.set('giaic-kanban-state', JSON.stringify(state)); }
+  catch(e){ console.error('save failed', e); }
+}
+
+function renderStations(){
+  const now = new Date();
+  const s1 = new Date('2026-07-25'), s2 = new Date('2026-08-15'), s3 = new Date('2026-08-31'), exam = new Date('2026-09-07');
+  let active = 1;
+  if(now >= s3) active = 3; else if(now >= s2) active = 2; else active = 1;
+  const stations = [
+    {n:1, name:'Foundation Build', date:'Jul 25 – Aug 14'},
+    {n:2, name:'Marathon Assembly', date:'Aug 15 – Aug 30'},
+    {n:3, name:'Final Calibration', date:'Aug 31 – Exam week (~Sept 1–7)'},
+  ];
+  document.getElementById('stations').innerHTML = stations.map(s => `
+    <div class="station ${s.n===active?'active':''}">
+      <div class="st-label">Station ${s.n}${s.n===active?'<span class="pulse"></span>':''}</div>
+      <div class="st-name">${s.name}</div>
+      <div class="st-date">${s.date}</div>
+    </div>`).join('');
+}
+
+function renderBoard(){
+  const filtered = TASKS.filter(t => activeFilter==='all' || t.priority===activeFilter);
+  const mastered = TASKS.filter(t => state[t.id]==='mastered').length;
+  document.getElementById('progressText').textContent = `${mastered} / ${TASKS.length} mastered`;
+  document.getElementById('barFill').style.width = (mastered/TASKS.length*100)+'%';
+
+  document.getElementById('board').innerHTML = COLS.map(col => {
+    const items = filtered.filter(t => state[t.id]===col);
+    const cards = items.map(t => {
+      const idx = COLS.indexOf(state[t.id]);
+      const link = t.url ? `<a class="open-link" href="${t.url}" target="_blank" rel="noopener">↗ open</a>` : `<span></span>`;
+      return `
+      <div class="card pri-${t.priority}">
+        <div class="mod"><span>${t.module}</span><span class="wk">Wk ${t.week}</span></div>
+        <div class="title">${t.title}</div>
+        <div class="row">
+          <div class="movebtns">
+            <button class="mbtn" ${idx===0?'disabled':''} onclick="moveCard('${t.id}',-1)">‹</button>
+            <button class="mbtn" ${idx===COLS.length-1?'disabled':''} onclick="moveCard('${t.id}',1)">›</button>
+          </div>
+          ${link}
+        </div>
+      </div>`;
+    }).join('') || `<div class="empty-hint">— khaali —</div>`;
+
+    return `<div class="col">
+      <div class="col-head"><span class="col-title">${COL_LABEL[col]}</span><span class="col-count">${items.length}</span></div>
+      <div class="cards">${cards}</div>
+    </div>`;
+  }).join('');
+}
+
+window.moveCard = function(id, dir){
+  const cur = COLS.indexOf(state[id]);
+  const next = Math.min(COLS.length-1, Math.max(0, cur+dir));
+  state[id] = COLS[next];
+  saveState();
+  renderBoard();
+};
+
+document.getElementById('filters').addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if(!chip) return;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  activeFilter = chip.dataset.f;
+  renderBoard();
+});
+
+document.getElementById('resetBtn').addEventListener('click', async () => {
+  TASKS.forEach(t => state[t.id] = 'backlog');
+  await saveState();
+  renderBoard();
+});
+
+(async function init(){
+  renderStations();
+  await loadState();
+  renderBoard();
+})();
+</script>
+</body>
+</html>
