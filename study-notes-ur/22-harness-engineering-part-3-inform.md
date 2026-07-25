@@ -2,31 +2,31 @@
 
 ## Aasan Zabaan Mein Samjho
 
-Ek constrained agent jise ye nahi pata ke usay kya jaanna zaroori hai, wo ya to fail hoga ya guess karne mein bohot paisa barbad karega. Harness ka "Inform" wala kaam ye hai ke agent ko sahi information, sahi waqt par, aur sahi form mein di jaye.
+Ek agent jo constrained toh hai lekin jo cheez usay pata honi chahiye wo nahi jaanta — wo ya fail hoga, ya guessing mein bohot sara paisa barbaad karega.
 
-Yahin par **AX (agent experience)** ka concept aata hai — agent ke nazariye se duniya kitni saaf aur pleasant lagti hai. Socho ek naye employee ko office mein bhej diya jaye bina kisi manual, bina kisi labeled door ke — wo ghoomta rahega, waqt zaya karega. AX ka matlab hai agent ke liye wo manual aur labeled doors banana.
+Harness ke "Inform" kaam ka matlab hai agent ko sahi information, sahi waqt par, aur sahi form mein dena.
 
-Achi information ka matlab sirf facts dena nahi — jab kuch ghalat ho, to error message bhi agle step ka rasta dikhana chahiye, warna agent wahi ghalti baar baar dohrata rahega.
+Aur yahi wo jagah hai jahan **AX (agent experience)** rehta hai — matlab agent ki nazar se duniya kitni saaf aur pleasant lagti hai.
 
 ## Zaroori Concepts
 
-### Context surfaces as harness parts
-Alag alag types ki knowledge alag jagah rehti hai:
+### Context surfaces harness ke parts ki tarah
+Alag knowledge alag jagah rehni chahiye:
 - Jo hamesha sach hai → rules file (permanent instructions).
 - Jo sirf is tarah ke task ke liye sach hai → skill.
 - Bahar ke systems tak pahunchne ki ability → connector.
 
 ### Errors ko batana chahiye age kya karna hai
-Ek achi error message sirf "ye fail ho gaya" nahi kehti. Ye agent (ya insaan) ko agla concrete kaam bhi batati hai. Buri error messages doom loops banati hain jahan agent wahi tooti hui cheez baar baar try karta rehta hai.
+Achi error message sirf "fail ho gaya" nahi bolti. Wo agent (ya insaan) ko agla concrete action batati hai. Buri error messages doom loops banati hain jahan agent wahi tooti hui cheez baar baar try karta rehta hai.
 
 ### AX (agent experience)
-Agent ka apna version hai user experience ka. Clear tool names, helpful error messages, stable identifiers, predictable structure, aur achhe defaults — sab AX ko behtar banate hain. Behtar AX matlab zyada reliability aur kam cost.
+Agent ka version hai user experience ka. Clear tool names, helpful error messages, stable identifiers, predictable structure, aur achhe defaults — sab AX behtar karte hain. Behtar AX matlab zyada reliability, kam cost.
 
-### Teen surfaces bataur sawal, aur bug ko triage kaise karein
-Har context surface exactly ek sawal ka jawab deta hai jo harness ko har beat mein handle karna hai: **rules file** batata hai "yahan hamesha kya sach hai?" (conventions, boundaries — har run mein parhi jaati hai, is liye chhoti rakho kyunki har line har beat mein tokens kharch karti hai); **skills** batati hain "ye specific kaam kaise karte hain?" (sirf tab load hoti hain jab task match kare, is liye detail free hai jab tak zaroorat na ho); **connectors** batate hain "ye kya reach kar sakta hai, aur kaise?" Jab koi run isliye fail ho ke agent ko *kuch pata nahi tha*, to ye tumhein das second ka triage deta hai, poore din ka prompt rewrite nahi: hamesha-sach fact → rules file; task-specific knowledge → skill; missing reach → connector.
+### Teen surfaces sawaal ki tarah, aur bug ko triage kaise karein
+Har context surface ek hi sawaal ka jawab deta hai jo harness ko har beat handle karna hota hai: **rules file** batati hai "yahan hamesha kya sach hai?" (conventions, boundaries — har run padhi jati hai, isliye choti rakho kyunke har line har beat tokens kharch karti hai); **skills** batati hain "ye specific kaam kaise karte hain?" (sirf tab load hoti hain jab task match kare, isliye detail free hai jab tak zaroorat na ho); **connectors** batate hain "kya reach kar sakta hai, aur kaise?" Jab koi run fail ho kyunke agent ko kuch pata nahi tha, ye tumhe das second ka triage deta hai, poori shaam prompt rewrite karne ke bajaye: hamesha-sach fact → rules file; task-specific knowledge → skill; missing reach → connector.
 
-### AX ki teen concrete findings
-Har surface ka ek reader hota hai, aur wo tum nahi ho — wo agent hai, task ke beech mein, jo poochh nahi sakta tumhara matlab kya tha. Is reader ke liye design karne se teen findings nikalti hain: **kam, focused tools, bohot saare overlapping tools se behtar hain** (Anthropic ka rule of thumb — agar ek human engineer confidently ye na bata sake ke konsa tool sahi hai, to agent bhi nahi bata sakta); **tool descriptions asal mein kaam karti hain** ("customer database ko email ya ID se search karta hai; max 20 rows return karta hai" ye "customer tool" se kahin behtar hai, jaise ek labeled darwaza unlabeled darwaze se behtar hota hai); aur **errors ko batana chahiye age kya karna hai**, kyunki ek loop mein error message hi *agle attempt ka input* hoti hai — "Permission denied: request the `repo` scope" agle beat mein khud theek ho jata hai, jab ke sirf "Error 403" us beat ko zaya kar deta hai. Kisi bhi surface ke liye test yehi hai: kya ek competent ajnabi, sirf ye text dekh kar, sahi agla kadam le sakta hai?
+### AX ke teen concrete findings
+Har surface ka ek reader hota hai, aur wo tum nahi ho — wo agent hai, task ke beech mein, jisse pooch nahi sakta tumhara matlab kya tha. Isi reader ke liye design karne se teen findings nikalti hain: **kam, focused tools zyada overlapping tools se behtar hote hain** (Anthropic ka rule — agar ek human engineer confidently na bata sake ke kaunsa tool sahi hai, toh agent bhi nahi bata payega); **tool descriptions asal kaam karti hain** ("customer database ko email ya ID se search karta hai; zyada se zyada 20 rows return karta hai" — ye "customer tool" se kahin behtar hai, jaise labeled darwaza unlabeled se behtar); aur **errors ko batana chahiye age kya karna hai**, kyunke loop mein error message hi agle attempt ka input hai — "Permission denied: `repo` scope maango" agle beat mein khud theek ho jata hai, jabke sirf "Error 403" us beat ko barbaad kar deta hai. Kisi bhi surface ka test yahi hai: kya sirf ye text dekh kar koi ajnabi bhi sahi agla step le sakta hai?
 
 ## Exam Mein Ye Kyun Aayega?
-Ek achi tarah inform kiya gaya agent, confused agent se kahin zyada sasta aur reliable hota hai. Exam mein tumhein pata hona chahiye ke alag alag knowledge kahan rehni chahiye.
+Ek achi tarah informed agent confused agent se kaafi zyada sasta aur reliable hota hai. Exam mein pata hona chahiye ke alag knowledge kahan reh ni chahiye.

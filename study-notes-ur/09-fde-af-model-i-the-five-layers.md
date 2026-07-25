@@ -2,33 +2,40 @@
 
 ## Aasan Zabaan Mein Samjho
 
-Ek paanch-layer cake socho jo neeche se upar parha jata hai. Sabse neeche layer (0) wo basic tools hain jo sab use karte hain. Layer 1 official cookbook tool hai jo koi bhi knowledge sambhal sakta hai. Layer 2 teacher aur building helper hai. Layer 3 ek profession (jaise accounting) ke liye khaas cookbook hai. Sabse upar layer (4) ek paying customer ke liye asal kaam hai.
+Ek 5-manzila imarat socho, neeche se upar tak parhte hain:
+
+- Layer 0 (neeche wali): wo basic tools jo sab use karte hain.
+- Layer 1: official System of Record — koi bhi knowledge sambhal sakta hai.
+- Layer 2: teacher aur building helper.
+- Layer 3: ek profession ke liye khaas package (jaise accounting).
+- Layer 4 (sab se upar): ek paying customer ke liye asal kaam.
 
 Platform neeche wali layers banata aur chalata hai. Graduates upar wali layers par banate hain aur paisa kamate hain.
 
 ## Zaroori Concepts
 
 ### Layer 0 — Foundation framework
-Basic tools: Markdown mein likhna, aisa database jo meaning se search kar sake, agents ke tools call karne ka standard tareeqa (MCP), aur login security. Ye ek dafa bana, koi bhi isko upar se dobara nahi banata.
+Basic tools: Markdown mein likhna, aisa database jo matlab se search kar sake, agents ke tool call karne ka standard tareeqa (MCP), aur login security. Ek baar banta hai, upar koi isay dobara nahi banata.
 
 ### Layer 1 — Content System of Record
-Kisi bhi knowledge ke jild ko trusted, searchable source of truth mein badalta hai. Yehi tool aaj book sambhalta hai aur kal accounting rules ya medical protocols sambhalega.
+Kisi bhi knowledge ko trusted, searchable source of truth mein badalta hai. Wahi tool book bhi sambhalta hai, aur baad mein accounting rules ya medical protocols bhi.
 
 ### Layer 2 — Teaching and development ecosystem
-Zia Tutor AI aur Zia Developer AI. Learning aur building almost zero extra AI cost par, kyunke har user apna model le kar aata hai.
+Zia Tutor AI aur Zia Developer AI. Learning aur building taqreeban zero extra AI cost par, kyunke har user apna model le kar aata hai.
 
 ### Layer 3 — Vertical ecosystems
 Profession-specific packages. Domain experts aur partners yahin rehte hain.
 
 ### Layer 4 — Customer instances
-Real projects real companies ke liye. Digital FTEs us company ke liye banaye jate hain aur success measure hoti hai.
+Real companies ke liye asal projects. Digital FTEs us company ke liye banaye jaate hain aur success measure hoti hai.
 
 ### System of Record teen scopes par
-**Machinery**: technical tools. **Kernel**: reusable software component. **Instance**: ek bhara hua copy (is book ka version, ya accounting version, ya kisi customer ka manual).
+- **Machinery**: technical tools.
+- **Kernel**: reusable software component.
+- **Instance**: ek bhari hui copy (isi book ka version, ya accounting wala version, ya kisi ek customer ka manual).
 
 ### Ayesha ka safar
-Lahore ki ek graduate ki chalti kahani hai jo in layers ko learner se upar wali layers par kama sakne wale insaan tak chadhti hai.
+Lahore ki ek graduate Ayesha ki running story hai, jo in layers mein learner se aage barh kar upar wali layers par kamane wali banti hai.
 
 ## Exam Mein Ye Kyun Aayega?
-
-Ye technology aur business dono ki badi picture hai — baaki takriban har topic inhi layers mein se kisi ek ki detail hai.
+Ye poori technology aur business ka big picture hai. Almost har doosra topic inhi layers mein se kisi ek ka detail hai.

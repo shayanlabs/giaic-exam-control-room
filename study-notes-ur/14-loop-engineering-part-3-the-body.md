@@ -2,37 +2,38 @@
 
 ## Aasan Zabaan Mein Samjho
 
-Body wo hissa hai jo loop ke ek run ke andar actually kaam karta hai. Agar heartbeat alarm clock hai to body wo insaan hai jo utha kar chores karta hai.
+Body wo hissa hai jo loop ke ek run ke andar asal kaam karta hai.
+
+Heartbeat agar alarm clock hai, to body wo insaan hai jo utha kar ghar ka kaam karta hai.
 
 ## Zaroori Concepts
 
 ### Worktrees
-Alag folders aur branches taake do agents (ya do runs) ek doosre ki files par pair na rakhein aur gadbad na banayein.
+Alag folders aur branches, taake do agents (ya do runs) ek doosre ki files par pair na maren aur mess na banaye.
 
 ### Skills
-Instructions ke saved packets jinhe agent dobara use kar sakta hai — ye knowledge aur pasandida tareeqon ko package karte hain.
+Save ki hui instructions ke packets jo agent dobara use kar sake. Ye knowledge aur pasandida kaam karne ke tareeqe pack karti hain.
 
 ### Connectors
-Wo pipes jinse agent bahar ke systems tak pahonch sakta hai (GitHub, Slack, databases, waghera).
+Wo pipes jo agent ko bahar ke systems (GitHub, Slack, databases waghera) tak pohanchate hain.
 
 ### Maker–checker
-Ek agent (ya process) kaam banata hai, ek doosra agent ya command usay check karta hai. Ye sabse zaroori reliability patterns mein se ek hai — jab stakes bade hon to kabhi bhi ek hi process ko apna kaam khud banane aur khud poori tarah approve karne mat do.
+Ek agent (ya process) kaam banata hai. Doosra agent ya command usay check karta hai. Ye sab se important reliability patterns mein se ek hai. Jab stakes high ho, kabhi bhi ek hi process ko apna kaam khud pura approve mat karne do.
 
 ### Checker ladder
-Checks ka ek set jo dheere dheere strong aur mehnga hota jata hai. Sasti/fast checks se shuru karo, mehngi/thorough checks sirf zaroorat par use karo.
+Checks ka ek set jo dheere dheere strong aur mehnga hota jata hai. Pehle sasty/fast checks se shuru karo. Mehnge, thorough checks tab hi use karo jab zaroorat ho.
 
-### Dynamic workflows body hain, loop nahi
-Ek fancy multi-step workflow bhi jo ek hi run ke andar chale, phir bhi bas body hi hai. Loop wo cheez hai jo baad mein doosra run shuru karne ka faisla karta hai.
+### Dynamic workflows ek beat ki body hain, loop nahi
+Ek single run ke andar ka fancy multi-step workflow bhi sirf body hai. Loop wo cheez hai jo baad mein ek aur run shuru karne ka faisla karta hai.
 
-### Verification skills ke 4 ghar
+### Verification skills 4 ghar mein
 Checking logic tool ke hisab se alag jagah reh sakti hai: rules files, skills, hooks, ya bahar ke checkers.
 
-### Loop mein connectors ke liye khaas rules kyun
-Connector (jo MCP par bana hota hai) loop ko sirf baat karne ke bajaye **act karne** deta hai — PR khol na, ticket update karna, Slack par post karna. Magar chunke loop retry karta hai aur tools khud chunta hai bina kisi ke dekhe, teen rules khaas ahmiyat rakhte hain jo haath se kaam karte waqt utne zaroori nahi hote: **kam, focused tools bohot saari overlapping tools se behtar hain** (tool choose karna har beat par nayi decision hai, koi check nahi karta — agar ek human engineer yaqeen se nahi bata sakta konsa tool sahi hai, to agent bhi nahi bata sakta), **writes repeat hone par bhi safe honi chahiye** (retry hua "create customer" call agar dobara customer bana de to duplicate billing ho jati hai, is liye blind creates se behtar hai update-or-create), aur **error messages ko batana chahiye aage kya karna hai**, kyunke loop mein error message hi agle beat ka input hota hai — "Permission denied: request the `repo` scope" khud retry par theek ho jata hai, jabke "Error 403" sirf ek beat zaya karta hai.
+### Connectors ko loop mein khaas rules kyun chahiye
+Connector (MCP par bana hua) hi wo cheez hai jo loop ko sirf baat karne ki bajaye kaam karne deta hai — PR khol dena, ticket update karna, Slack par post karna. Lekin loop retry karta hai aur bina kisi ke dekhe tools choose karta hai, is liye teen rules aisi matter karti hain jo haath se kaam karte waqt utni matter nahi karti: **kam, focused tools zyada overlapping tools se behtar hain** (tool choice har beat par nayi banti hai, bina kisi check ke — agar ek human engineer confidently na bata sake konsa tool sahi hai, to agent bhi nahi bata sakta); **writes repeat hone ke liye safe hone chahiye** ("create customer" wala retry call agar doosra customer bana de, matlab double billing — is liye blind create ki bajaye update-or-create behtar hai); aur **error messages agla step batayen**, kyunke loop mein error message hi agle beat ka input banta hai — "Permission denied: repo scope maango" khud retry par fix ho jata hai, jabke "Error 403" sirf ek beat zaya karta hai.
 
-### Verification skill ke chaar ghar
-Ek check jo tum har change ke baad haath se chalate rehte ho ("kya maine logs se request body nikaal di?") chaar gharon mein se kisi ek mein reh sakta hai, har ghar ek alag heartbeat hai: **standalone** (tum khud jaan boojh kar chalate ho — tum abhi bhi heartbeat ho), **embedded** (us skill ke aakhir mein jod diya jo kaam karti hai, taake khud fire ho — magar sirf un skills par kaam karta hai jinhe tum edit kar sakte ho, kyunke built-in ya plugin skills chupke se overwrite ho jati hain), **chained** (ek skill apne aakhir mein doosri ko call karti hai, "main hamesha check chalata hoon baad mein" ko "skill hamesha check chalati hai" bana deti hai), aur **har PR par** (wahi check event heartbeat se fire hoti hai, taake teammate ka change bhi wahi gate paar kare jo tumhara). Graduation rule: seedha "har PR par" par mat kudo — har ghar ne pichle ghar mein khud ko sahi saabit karna hota hai, wahi "unattended se pehle watched" discipline jo loops par khud lagti hai.
+### Verification skill ke 4 ghar
+Jo check tum manually har change ke baad chalate ho, wo 4 ghar mein reh sakta hai, har ek ka apna heartbeat: **standalone** (tum khud jaan boojh kar chalate ho — tum abhi bhi heartbeat ho), **embedded** (kaam karne wali skill ke aakhir mein jur jata hai, khud fire hota hai — sirf un skills par kaam karta hai jo tum edit kar sakte ho, built-in ya plugin skills chupke se overwrite ho jati hain), **chained** (ek skill apne end par doosri ko call karti hai — "main hamesha baad mein check chalata hoon" se "skill khud hamesha check chalati hai" ban jata hai), aur **har PR par** (wahi check event heartbeat se fire hota hai, taake teammate ka change bhi wahi gate paar kare jo tumhara kiya tha). Graduation rule: seedha "har PR par" mat kudo — har ghar ko pehle wale ghar mein khud ko sahi prove karna parta hai, wahi "unattended se pehle watched" wala usool jo loops par bhi laagu hota hai.
 
 ## Exam Mein Ye Kyun Aayega?
-
-Loops banane ka zyada tar concrete engineering kaam body ke andar hota hai — exam expect karta hai tumhe main pieces pata hon, khaas kar maker–checker idea.
+Loops banane ka zyada tar concrete engineering kaam body mein hi hota hai. Exam mein main pieces, khaas kar maker-checker idea, pata hona chahiye.

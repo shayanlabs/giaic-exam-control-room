@@ -2,39 +2,37 @@
 
 ## Aasan Zabaan Mein Samjho
 
-Aisa loop jo khud chalta rahe, wo bohot powerful cheez hai. Lekin agar wahi loop bina kisi insaani control ke chalta rahe, to wo khatarnak ban jata hai. Ye part isi baat par hai — kaise feedback loops, paison ki asliyat, aur design ke faisle mil kar ye yaqeeni banate hain ke jab computer tumhare sote waqt kaam kar raha ho, tab bhi control insaan ke haath mein rahe.
+Khud chalne wala loop powerful hota hai — but bina kisi control ke khud chalne wala loop seedha khatarnak hai. Socho computer raat bhar kaam kar raha hai aur tum so rahe ho — control kaun rakhega?
 
-Socho tum ek car cruise control par chala rahe ho — car khud speed maintain karti hai, lekin steering wheel abhi bhi tumhare haath mein hai. Yehi soch loop engineering mein bhi honi chahiye: automation chale, lekin steering insaan ke paas rahe.
-
-Cost ka pehlu bhi bohot important hai — loop kitni martaba chalta hai, ye seedha paise par asar dalta hai. Same design mahine ka $20 bhi ho sakti hai aur $1,800 bhi, sirf is baat par ke wo kitni baar jaagti hai aur har baar kitna context load karti hai.
+Ye part isi ki baat karta hai: feedback loops, paison ka asli hisaab, aur wo design choices jo insaan ko charge mein rakhti hain, chahe computer background mein akela kaam kar raha ho.
 
 ## Zaroori Concepts
 
 ### Teen feedback loops
-Insaan ki involvement ke different levels jo system ko honest aur sahi goals ki taraf rakhte hain.
+Insaan ki involvement ke alag levels — ye system ko honest rakhte hain aur sahi goal ki taraf pointed rakhte hain.
 
 ### Token cost aur cadence
-Loop jitni baar chalta hai, cost utni hi zyada badhti hai. Wakeup frequency aur context load dono milkar mahine ka bill decide karte hain.
+Loop kitni martaba chalta hai, iska cost par bohot bada asar padta hai. Same design $20/month bhi ban sakti hai aur $1,800/month bhi — depend karta hai loop kitni baar wake hota hai aur har baar kitna context load karta hai.
 
 ### Human in / on / out of the loop
-- **In the loop**: har important step par insaan zaroori hai.
-- **On the loop**: insaan goals set karta hai aur results review karta hai, lekin har turn khud nahi chalata.
-- **Out of the loop**: system ke paas standing permissions hain aur sirf exceptions par insaan ko bulata hai.
+- **In the loop**: har important step pe insaan ki zaroorat.
+- **On the loop**: insaan goals set karta hai, results review karta hai, lekin har turn khud drive nahi karta.
+- **Out of the loop**: system standing permissions ke saath chalta hai, sirf exceptions ke liye insaan ko bulaya jata hai.
 
 ### AI gravity
-Ek successful system ka natural pull hota hai ke wo zyada se zyada kaam apne upar le le. Jab tum ye jaan-boojh kar choose karo to acha hai, lekin agar ye bina kisi decision ke apne aap badhta jaye to khatarnak hai.
+Ek successful system ka natural pull hota hai ke wo zyada se zyada kaam apne upar le le. Jaan bujh kar choose karo toh mast baat hai, lekin bina kisi decision ke apne aap phailta jaye toh khatra hai.
 
 ### Ng ka context advantage
-Andrew Ng ka observation ke jis side ke paas behtar context ho (data, process knowledge, evaluation), uska advantage lambe waqt tak rehta hai. Achi spines aur standing permissions isi idea ko practice mein laane ka tareeka hain.
+Andrew Ng ka observation hai — jis taraf better context ho (data, process knowledge, evaluation), uska lasting advantage hota hai. Achi spines aur standing permissions isi idea ko amal mein laane ke tareeqe hain.
 
 ### Standing permissions
-Wo actions jo loop bina baar baar poochhe kar sakta hai — pre-approved hain. Inhe soch samajh kar choose karna chahiye aur waqt waqt par review karna chahiye.
+Wo actions jo loop har baar poochhe bina kar sakta hai, pehle se approved. Inhe carefully chuno aur time time pe review karte raho.
 
 ### Teen loops, teen speeds — worked example
-Socho tum agent ko ek bache ke liye chota typing game banane ko kehte ho. **Coding loop** minutes mein ghoomta hai: agent game likhta hai, test karta hai, bugs fix karta hai jab tak tumhari instructions match na ho jaye — yehi wo loop hai jo iss course ke six parts se banaya. **Feedback loop** ghanton mein ghoomta hai: tum game khol kar khelte ho, decide karte ho buttons bade hone chahiye ya costumes unlock honi chahiye, instructions update karte ho, agent dobara banata hai. **Outside loop** din mein ghoomta hai: real log — dost, bacha — game istemal karte hain, aur unka react karna tumhein batata hai age kya fix karna hai. Ye teeno loops ek dusre ke andar nested hain, tez loop khud chalta hai jab ke do slow loops tumhein chahiye — kyunki Andrew Ng ke alfaaz mein, tumhare paas **context advantage** hai: tum jaante ho ye kaun use karega aur "acha" kaisa lagta hai, agent ko ye nahi pata.
+Socho tumne agent ko bola ek bachay ke liye chota typing game bana do. **Coding loop** minutes mein ghoomta hai — agent game likhta hai, test karta hai, bugs fix karta hai jab tak tumhari instructions match na ho jayein — yehi wo loop hai jo is course ke six parts se banta hai. **Feedback loop** ghanton mein ghoomta hai — tum game khol ke try karte ho, decide karte ho buttons bade hone chahiye ya costumes unlock honi chahiye, phir instructions update karke agent se dobara banwate ho. **Outside loop** dinon mein ghoomta hai — asli log, dost, bachay, game actually use karte hain, aur unka react karna batata hai age kya theek karna hai. Ye teeno loops ek dusre ke andar baithe hote hain — fast loop khud chalta rehta hai, jabke dono slow loops ko tumhari zaroorat hoti hai, kyunke jaise Andrew Ng kehte hain, tumhare paas **context advantage** hai: tumhe pata hai ye kaun use karega aur "achha" kaisa lagta hai — agent ko ye nahi pata.
 
-### In, on, ya out of the loop — industry ke exact alfaaz
-Is course ke "human gate" se hat kar, bahar ki duniya (AI safety papers, EU AI Act, bank compliance teams) isi idea ke liye teen fixed terms use karti hai jo regulator ya buyer bilkul precisely use karega: **human in the loop** matlab har action lagu hone se pehle insaan approve karta hai (zyada control, dheema — ye turn-by-turn prompting ya khud human gate hai); **human on the loop** matlab system khud kaam karta hai jab ke insaan dekh raha hai aur beech mein rok sakta hai (koi Routine `claude/` branches par push kar rahi hai jab tum roz subah review karte ho); **human out of the loop** matlab koi bhi dekh nahi raha aur koi intervene bhi nahi kar sakta — ye kabhi bhi ek valid third option ke tor par nahi dikhaya jata, ye failure mode hai. Ek acha loop har action ke hisaab se in cheezon ko mix karta hai — morning-triage loop safe fixes ke liye on-the-loop chalta hai aur risky cheezon ke liye wapas in-the-loop chala jata hai, jaise reviewer ka FAIL ya `main` mein final merge.
+### In, on, ya out of the loop — industry ke exact words
+Is course ke "human gate" se hat kar, poori duniya (AI safety papers, EU AI Act, bank compliance teams) isi idea ke liye teen fixed terms use karti hai, aur koi regulator ya buyer inhi exact words mein baat karega: **human in the loop** matlab har action se pehle insaan approve karta hai (zyada control, thora slow — ye turn-by-turn prompting ya khud human gate hai); **human on the loop** matlab system khud chalta hai jabke insaan dekhta rehta hai aur zaroorat par rok sakta hai (jaise ek Routine jo `claude/` branches par push karti hai jabke tum roz subah review karte ho); **human out of the loop** matlab koi dekh hi nahi raha, koi rok bhi nahi sakta — ye kabhi ek valid option ki tarah present nahi hota, ye seedha failure mode hai. Ek achi loop in teeno ko action ke hisaab se mix karti hai — subah wali triage loop safe fixes ke liye on-the-loop chalti hai, aur kisi risky cheez (jaise reviewer ka FAIL ya `main` mein final merge) ke waqt wapas in-the-loop mein aa jati hai.
 
 ## Exam Mein Ye Kyun Aayega?
-Exam sirf ye nahi dekhta ke loop chal raha hai ya nahi — ye dekhta hai ke loop safe, affordable, aur insaan ke control mein hai ya nahi.
+Exam sirf ye nahi dekhega ke loop chalti hai ya nahi — ye bhi dekhega ke loop safe, affordable, aur human control mein rehti hai ya nahi.

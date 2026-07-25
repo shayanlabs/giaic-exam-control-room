@@ -2,23 +2,29 @@
 
 ## Aasan Zabaan Mein Samjho
 
-Har koi poora khana nahi pakata — koi sirf sabzi katta hai, koi sirf swaad check karta hai, koi sirf kitchen saaf karta hai. Isi tarah ye book bhi honestly bolti hai: "hum yahan tak sikhate hain, ye baaki bade jobs bhi real hain magar ye book unke liye nahi hai."
+Har koi poora khana nahi banata na? Koi sabzi kaatta hai, koi taste karta hai, koi bas bartan saaf karta hai. Waise hi Digital FTE banane ke pure kaam mein bhi alag alag log alag hissa sambhalte hain — sabko sab kuch nahi seekhna.
+
+Aur ye book bilkul honest hai is baare mein: "Hum yahan tak sikhate hain, aage nahi." Kuch bade jobs sach mein exist karte hain, lekin wo is book ka scope nahi.
 
 ## Zaroori Concepts
 
-### Supporting roles (madadgar)
-**SME as Skill Author**: SME matlab Subject-Matter Expert — koi real accountant, doctor ya lawyer, jo wo knowledge aur rules likhta hai jo AI workers use karenge. Inke bagair AI ke paas khada hone ki koi sachi buniyad nahi hoti.
-**Connector / Plugin Engineer**: Ye banda saaf pipes banata hai jinse AI safely email, GitHub, database waghera se baat kar sake.
-**Evals Engineer**: Ye tests design karta hai jo prove karte hain AI sach mein acha kaam kar raha hai aur galtiyan jaldi pakadta hai.
-**Governance Officer**: Ye kaun kya dekh sakta hai, kaun kya badal sakta hai, aur safety kaise protect hoti hai, in sab rules ka owner hota hai.
-**FTE Supervisor**: Ye insaan Digital FTEs ko watch karta hai, unka kaam check karta hai, aur jab zaroorat ho khud step in karta hai.
+### Supporting roles (helpers)
+- **SME as Skill Author**: SME matlab Subject-Matter Expert — koi real accountant, doctor, ya lawyer. Ye banda wo knowledge aur rules likhta hai jo AI workers use karenge. Isके bagair AI ke paas khada hone ko kuch sahi nahi hota.
+- **Connector / Plugin Engineer**: Ye banda saaf pipes banata hai taake AI safely doosre systems (email, GitHub, databases waghera) se baat kar sake.
+- **Evals Engineer**: Ye banda wo tests design karta hai jo prove karte hain AI sach mein achha kaam kar raha hai, aur ghaltiyan jaldi pakarta hai.
+- **Governance Officer**: Ye banda rules ka owner hota hai — kaun kya dekh sakta hai, kaun kya change kar sakta hai, safety kaise protect hoti hai.
+- **FTE Supervisor**: Ye insaan hai jo Digital FTEs ko dekhta hai, unka kaam check karta hai, aur zaroorat parne par khud aage aata hai.
 
 ### Book jahan jaan boojh kar rukti hai
-Book core skills sikhati hai Digital FTEs banane aur chalane ki, lekin teen bade areas mein expert nahi banati: poora **LLMOps** (bade language-model systems ko huge scale par chalana), deep **Harness Engineering** (jitna baad mein practical level par sikhaya jayega us se aage), aur pure **AI Data Engineering** (massive data pipelines banana as main job). Ye sab real jobs hain, book bas ek saaf line kheenchti hai ke course ke andar kya hai aur bahar kya.
+Book core skills sikhati hai Digital FTEs banane aur chalane ke liye. Lekin ye teen badi cheezon mein expert nahi banati:
+- Poora **LLMOps** (bohot bade language-model systems ko scale par chalana)
+- Deep **Harness Engineering** — jitna practical level baad mein aayega uske aage nahi
+- Pure **AI Data Engineering** (massive data pipelines banana hi jiska main kaam ho)
 
-### Ye line jaan boojh kar kyun khenchi gayi
-In teenon excluded areas mein se har ek apni poori specialization hai apne career track aur apni books ke saath. Sab ko expert level tak sikhane ki koshish karne se wo asal cheez dilute ho jati jis mein book tumhein bohot acha banana chahti hai: generalist jo Digital FTE ko end-to-end specify, build aur deploy kar sake. Book chahti hai tum ek kaam mein bohot acha bano, paanch mein average nahi.
+Ye sab real jobs hain. Book bas saaf line kheenchti hai ke course ke andar kya hai aur bahar kya.
+
+### Ye line jaan boojh kar kyun kheenchi gayi
+In teenon (LLMOps, deep Harness Engineering, pure AI Data Engineering) mein se har ek apni khud ki poori specialization hai, apna career track aur apni books rakhta hai. Agar book sab kuch "expert" level tak sikhane ki koshish karti to jo asal cheez sikhani thi wo hi kamzor ho jati — matlab generalist banana jo spec likh sake, bana sake, aur poora Digital FTE deploy kar sake. Book chahti hai tum ek kaam mein bohot achhe bano, panch kaamon mein aadhe-adhoore nahi.
 
 ## Exam Mein Ye Kyun Aayega?
-
-Exam chahta hai tumhe poora naqsha pata ho — supporting roles bhi aur book ki honest boundaries bhi.
+Poora map pata hona chahiye — helper roles bhi aur book ki honest boundaries bhi, dono exam mein poochi ja sakti hain.

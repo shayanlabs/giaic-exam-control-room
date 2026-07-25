@@ -2,37 +2,37 @@
 
 ## Aasan Zabaan Mein Samjho
 
-Golden set ek soch samajh kar chuni gayi collection hai real cases ki (khaas kar wo failures jo tum pehle hi pakad chuke ho) jinke khilaf tum system ko baar baar chalate ho.
+Golden set matlab real cases ka ek carefully chuna hua collection (khaas taur par wo failures jo tum pehle hi pakar chuke ho) jinke against system ko baar baar chalate ho.
 
-Ye us cheez ke sabse qareeb hai jo agent behavior ke liye ek regression suite ho sakti hai. Socho tum ek doctor ho jo ek naye treatment ko test karne se pehle sab purani mushkil cases ki file nikaal kar dobara check karte ho — "pichli baar jo galtiyan hui thin, kya wo abhi bhi ho rahi hain?" Golden set bilkul yehi kaam karta hai.
+Ye agent behavior ke liye jitna qareeb ho sakta hai utna hi qareeb ek regression suite hai.
 
 ## Zaroori Concepts
 
-### Har pakdi gayi failure ek case ban jati hai
-Sabse valuable cases wo hain jo pehle system ko tod chuki hain ya sharminda kar chuki hain. Unhein permanent test cases banane se wahi failure chupke se dobara nahi aa sakti.
+### Har pakri hui failure ek case ban jati hai
+Sabse valuable cases wahi hain jo pehle system ko tora ya sharminda kiya. Unhe permanent test cases banane se wahi failure chupke se wapas nahi aa sakti.
 
 ### Case ki shape aur runner
-Har case ka ek saaf structure hai (input, context, expected properties ya rubric) aur ek runner hai jo agent ko chalata hai aur result ko score karta hai.
+Har case ki ek clear structure hoti hai (input, context, expected properties ya rubric) aur ek runner jo agent ko chala kar result score karta hai.
 
 ### Origin line
-Har case kahan se aayi (kaunsa real incident ya kaunsi synthetic construction), ye record karna tumhein samjhata hai ke set asal mein kya cover karta hai.
+Har case kahan se aayi ye record karna (kaunsa real incident ya kaunsa synthetic construction) samajhne mein madad karta hai ke set asal mein kya cover karta hai.
 
 ### Failures pehle aati hain
-Real failures ko easy synthetic cases se zyada priority do. Set itna mushkil hona chahiye ke wo useful ho.
+Real failures ko easy synthetic cases se pehle rakho. Set itna hard hona chahiye ke wo useful bhi ho.
 
-### 20-40 cases across difficulty
-Ek practical size: itna bada ke regressions pakad sake, itna chota ke chala aur maintain kiya ja sake.
+### 20-40 cases, alag difficulty mein
+Ek practical size — itni bari ke regressions pakar sake, itni choti ke run aur maintain ho sake.
 
-### Errors, fails ke barabar nahi hain
-- **Error**: system crash ho gaya ya finish nahi kar saka.
-- **Fail**: system finish hua lekin result ghalat ya kaafi acha nahi tha.
-Dono important hain, lekin dono alag signals hain.
+### Errors, fails jaisi nahi hoti
+- **Error**: system crash ho gaya ya finish hi nahi hua.
+- **Fail**: system finish hua lekin result ghalat ya kaafi achha nahi tha.
+Dono matter karte hain, lekin dono alag signals hain.
 
-### Worked example: ek case asal mein kaisi dikhti hai
-Ek real case ek chhoti si JSON file hoti hai, koi abstract idea nahi. Source se ek example: `deleted-test-001`, category `false_green`, judge ko `diff` parhne ko bolta hai, `expected: {verdict: "FAIL", risk: "high"}` ke saath, ek `must_mention` list, aur ek `origin` line jo wapas real incident ki taraf ishara karti hai ("bad night, 2026-06-30"). Ye `origin` field important hai — isi se pata chalta hai ke ek case proven reachable hai (ek real pakdi gayi failure) ya sirf koi imagine ki hui invented case hai.
+### Worked example — ek case asal mein kaisi dikhti hai
+Ek real case ek chota JSON file hai, koi abstract idea nahi. Source se ek misaal: `deleted-test-001`, category `false_green`, judge ko `diff` padhne ko bolti hai, `expected: {verdict: "FAIL", risk: "high"}` ke saath, ek `must_mention` list, aur ek `origin` line jo wapas asal incident ki taraf point karti hai ("bad night, 2026-06-30"). Ye `origin` field matter karti hai — isi se pata chalta hai kaunsi case proven-reachable hai (ek real pakri hui failure) aur kaunsi sirf koi socha hua invented case hai.
 
 ### Runner ek loop hai, framework nahi
-Source bilkul saaf kehta hai ke tumhein special eval software ki zaroorat nahi: runner sirf ek shell loop hai jo har case ko chand baar chalata hai (teen ek common starting point hai), agent se apna verdict ek file mein likhwata hai, aur `jq` jaise tool se us file ko expected ke sath compare karta hai. Ek baat yaad rakhne layak hai: errors aur fails alag se count kiye jate hain, kyunki "judge ne protocol tod diya aur koi jawab hi nahi diya" aur "judge ne jawab diya lekin ghalat tha" — dono alag problems hain jinke fix bhi alag hain.
+Source seedha kehta hai ke koi khaas eval software ki zaroorat nahi — runner sirf ek shell loop hai jo har case ko kai baar chalata hai (teen ek common starting point hai), agent se verdict ek file mein likhwata hai, aur `jq` jaisa tool use karke us file ko expected se compare karta hai. Ek detail yaad rakhne wali: errors aur fails alag alag count hoti hain, kyunke "judge ne protocol tor diya aur koi jawab nahi diya" aur "judge ne jawab diya lekin ghalat tha" — ye alag problems hain, alag fixes chahte hain.
 
 ## Exam Mein Ye Kyun Aayega?
-Golden set ke bagair tumhare paas ye jaanne ka koi reliable tareeka nahi ke system behtar ho raha hai ya kharab. Exam mein ye samajhna zaroori hai ke isay kaise banaya aur maintain kiya jaye.
+Golden set ke bina ye pata karne ka koi reliable tareeqa nahi ke system behtar ho raha hai ya kharab. Exam chahta hai tumhe pata ho ise kaise banana aur maintain karna hai.

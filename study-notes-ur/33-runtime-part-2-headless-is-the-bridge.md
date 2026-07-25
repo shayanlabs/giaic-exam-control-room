@@ -1,27 +1,27 @@
 # 33. Part 2 — Headless Is the Bridge
 
 ## Aasan Zabaan Mein Samjho
+Dekho, "headless" ka matlab seedha hai — loop chalega, lekin koi screen pe baith kar nahi dekhega. Cloud scheduling isi cheez ka pul hai: "jab main dekh raha hoon tab chalta hai" se "jab main so raha hoon tab bhi chalta hai" — is beech ka connection.
 
-"Headless" ka matlab hai loop bina kisi insaan ke screen dekhe bhi chal sakta hai. Socho jaise ek naukar itna trained ho jaye ke usko roz roz samne khare ho ke instructions dene ki zaroorat na rahe — bas ek baar taskeel karo aur wo apna kaam kar leta hai.
+Maza ki baat ye hai ke tumne ye pul pehle hi paar kar liya hai, bina bataye. Eval runner mein jo `claude -p` ya `opencode run` commands chalate ho — wahi headless mode hai. Koi khula window nahi, bas prompt gaya, kaam hua, output aaya. Yehi wo idea hai jis pe Home 2 khada hai: jo bhi cheez command chala sakti hai — shell script, cron job, CI runner, cloud scheduler — wo ab tumhara agent bhi chala sakti hai. Bas ek rule yaad rakho: headless runs ko loudly fail hona chahiye, kyunke jo exit code koi check hi nahi karta, wo silently miss ho jaata hai.
 
-Cloud scheduling wo pull hai jo "jab tak mai dekh raha hoon tab chalta hai" se "mai so raha hoon tab bhi chalta hai" ke darmiyan hai. Ye bridge crossing karna itna mushkil nahi jitna lagta hai — kyunke tumne pehle hi headless mode use kiya hua hai bina jaane. Jab bhi tumne `claude -p` ya `opencode run` chalaya, wo agent ek command ki tarah chala tha, conversation ki tarah nahi — koi window khuli nahi thi, bas ek prompt gaya aur output aaya. Yehi principle Home 2 (cloud schedule) ke peeche hai: jo bhi cheez command chala sakti hai — shell script, cron job, CI runner — wo tumhara agent bhi chala sakti hai.
-
-Lekin ek zaroori rule yaad rakhna: headless run zor se fail hona chahiye. Agar exit code koi check nahi kar raha, to ek failed run chupke se guzar jayega aur kisi ko pata bhi nahi chalega.
+Ab is mode pe bharosa karne se pehle, 6 cheezein pakki honi chahiye — inhe "minimum unattended kit" bolte hain.
 
 ## Zaroori Concepts
 
 ### Home 2 (cloud schedule)
-Char homes mein se ek — loop ko cloud ka clock start karta hai, aur wo aise environment mein chalta hai jisko tumhara laptop khula hone ki zaroorat nahi.
+4 homes mein se ek — loop cloud clock se start hota hai, aisi jagah chalta hai jahan tumhara laptop khula hone ki zaroorat nahi.
 
-### The minimum unattended kit
-Loop ko bina dekhe chalane se pehle ye 6 cheezein zaroor honi chahiye: **Idempotency** (dobara chalne se double asar na ho), **missed-run detection** (pata chale agar scheduled run start hi nahi hui), **concurrency lock** (do runs ek dusre ko tabahi na macha dein), **credentials** (secrets safely available hon), **time limits** (run hamesha ke liye na chale), aur **cost limits** (unlimited paisa kharch na ho).
+### Minimum unattended kit
+1. **Idempotency** — do baar chale to double effect na ho.
+2. **Missed-run detection** — pata chale agar scheduled run start hi nahi hua.
+3. **Concurrency lock** — do runs ek dusre ke upar na chadhein.
+4. **Credentials** — secrets safely available hon.
+5. **Time limits** — run hamesha ke liye na chale.
+6. **Cost limits** — run unlimited paisa na uda de.
 
-### Headless is something you already built
-Eval runner ke `claude -p` aur `opencode run` calls dikhate hain ke headless mode koi naya concept nahi — ye tumne pehle hi use kar liya tha. Bas ab isko schedule pe daalna hai.
-
-### A worked example: Ayesha's invoicing loop
-Ayesha, Lahore mein, ek freelance-invoicing loop chalati hai. Roz shaam 6 baje client ko invoice bhejna hota hai, lekin load-shedding aksar ussi waqt bijli le jati hai. Uska masla sirf clock ka hai — loop khud theek kaam karta hai — is liye schedule ko cloud runner (Home 2) pe move karna kaafi hai. Lekin scheduler bhi sirf "around" ek time promise karta hai, "exactly" nahi — isi liye missed-run detection aur 6:30 tak alarm jaisi cheezein zaroori hain taake "bina fail" ka wada asli mein pura ho.
+### Ayesha ka invoicing loop
+Ayesha Lahore mein freelance invoicing loop chalati hai, aur load-shedding roz shaam 6 baje bijli le jaati hai — bilkul us waqt jab client daily invoice expect kar raha hota hai. Uska masla sirf clock ka hai, loop to sahi kaam kar raha hai — to schedule ko cloud runner (Home 2) pe le jaana hi solution hai. Lekin dhyan rahe, scheduler bhi sirf "around" ek time promise karta hai, "exact" nahi — isliye missed-run detection aur 6:30 tak kuch na chale to alarm, yehi asal mein "without fail" deliver karta hai, akela scheduler nahi.
 
 ## Exam Mein Ye Kyun Aayega?
-
-Headless wo pehla pull hai jo zyada tar students cross karenge — aur ye 6 controls hi minimum safety net hain jo bina samjhe koi bhi loop unattended nahi chorna chahiye.
+Headless wo pehla pul hai jo zyada tar log paar karte hain. Ye 6 controls minimum safety net hain, exam mein inka pata hona chahiye.

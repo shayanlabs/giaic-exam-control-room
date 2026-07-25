@@ -2,24 +2,27 @@
 
 ## Aasan Zabaan Mein Samjho
 
-Ek simple rule hai jo poore cake ko girne se rokta hai: **agar wohi kaam bohot saare customers ke liye ho raha hai, to us kaam ko shared layer mein neeche le aao taake aage aane wale customers ko wo muft mile.**
+Ek seedha rule hai jo poori imarat ko bikharne se bachata hai:
 
-Agar tum ye rule ignore karo to har naya customer tumhe wahi cheezein baar baar banwata hai — ye mehnga aur slow hota hai.
+**Agar wahi kaam bohot saare customers ke liye ho raha hai, to usay shared layer mein neeche shift kar do, taake aane wale customers ko wo muft mile.**
+
+Agar ye rule ignore kar do, to har naya customer tumse wahi cheezein baar baar banwata rahega. Ye mehnga aur slow hai.
 
 ## Zaroori Concepts
 
-### Repeated work neeche jata hai
-Jab teen alag customers ko wohi review step ya wohi domain rule chahiye ho, to wo piece one-off custom kaam ke taur par nahi rehna chahiye. Usay saaf karo aur shared platform ya vertical mein daal do.
+### Repeat hone wala kaam neeche jata hai
+Jab teen alag customers ko wahi review step ya wahi domain rule chahiye ho, to wo one-off custom kaam banke nahi rehna chahiye. Usay clean karo aur shared platform ya vertical mein push kar do.
 
 ### 6 promotion conditions
-Ek practical checklist jo decide karti hai kab koi cheez share karne layak hai. Iski ruh yehi hai: kaam general ho, saaf ho, aur ek se zyada customer ke liye valuable ho.
+Ek practical checklist jo decide karti hai kab koi cheez share karne layak hai. Spirit simple hai: kaam general ho, saaf ho, aur ek se zyada customer ke liye valuable ho.
 
 ### Clean-room / opt-in / rewarded promotion
-**Clean-room**: kisi bhi customer ke private secrets ke bagair bana ho. **Opt-in**: customers ko naya shared version lena majboori nahi. **Rewarded**: jo log reusable piece dhoond kar saaf karte hain unko credit milta hai.
+- **Clean-room**: kisi bhi customer ke private secrets ke bagair banaya gaya.
+- **Opt-in**: customers par naya shared version zabardasti thopa nahi jata.
+- **Rewarded**: jo log reusable piece dhundte aur clean karte hain, unhe credit milta hai.
 
 ### 3+ customers se review trigger hota hai
-Jab teen ya zyada customers se wohi zaroorat dikhe, ye aam taur par signal hota hai ke "kya isay share karna chahiye" wala formal discussion hona chahiye.
+Jab teen ya usse zyada customers se wahi zaroorat dikhe, ye usually signal hota hai ke ek formal "kya isay share karna chahiye?" discussion honi chahiye.
 
 ## Exam Mein Ye Kyun Aayega?
-
-Is law ke bagair model kabhi platform nahi banta, wo one-off projects ka dher hi reh jata hai — exam mein promotion discipline poochha jayega.
+Is law ke bagair model kabhi platform nahi banta — bas one-off projects ka dhair reh jata hai. Exam mein ye promotion discipline samajhna zaroori hai.

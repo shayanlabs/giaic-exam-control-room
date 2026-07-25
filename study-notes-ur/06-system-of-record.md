@@ -2,38 +2,39 @@
 
 ## Aasan Zabaan Mein Samjho
 
-Normal search box aise hai jaise kisi dost se poochna jo kabhi yaad rakhta hai kabhi guess karta hai. **System of Record** us official rule book jaisa hai jis par poora school yaqeen karta hai — jild par naam hota hai (owner), page numbers kabhi nahi badalte, ek date hoti hai jab aakhri baar check hua, aur rules hote hain ke kaun is mein likh sakta hai.
+Ek normal search box us dost jaisa hai jo kabhi sahi yaad rakhta hai, kabhi bas andaza laga leta hai. Bharosa karna mushkil hota hai kyunke pata nahi kab galat bol de.
 
-Jab AI System of Record se jawab deta hai to wo exact page point kar sakta hai — isi se pata chalta hai jawab guess nahi hai.
+**System of Record** bilkul alag cheez hai — ye us official kitab jaisi hai jise poora idara sach maanta hai. Iske cover par owner ka naam hota hai, page numbers kabhi nahi badalte, ek date hoti hai jab last check hui thi, aur clear rules hote hain kaun likh sakta hai.
+
+Jab AI System of Record se jawab deta hai, wo exact page bata sakta hai. Bas isi se pata chalta hai jawab andaza nahi, sach hai.
 
 ## Zaroori Concepts
 
 ### Governance, sirf retrieval nahi
-Retrieval matlab "mujhe kuch mila jo ye kehta hai." Governance matlab "ye official, checked, versioned sach hai jis ke peeche poori organization khadi hai."
+Retrieval matlab "mujhe kahin ye likha mila." Governance matlab "ye official, checked, versioned sach hai jiske peeche poora idara khada hai." Farq bara hai.
 
 ### Named owner
-Kisi ka naam is par hota hai — agar content ghalat ho to wo insaan responsible hai.
+Kisi ka naam iske sath juda hota hai. Content galat nikle to wo banda jawabdeh hota hai.
 
 ### Versioning
-Tum dekh sakte ho pichle mahine sach kya tha aur aaj kya hai — changes record hoti hain.
+Pichle mahine sach kya tha aur aaj kya hai — dono dekh sakte ho. Har change record hoti hai.
 
 ### Review
-Naya content tab tak official nahi banta jab tak koi usay check na kar le.
+Naya content tab tak "official" nahi banta jab tak koi usay check na kar le.
 
 ### Access control
-Har koi (aur har AI) sab kuch parh ya badal nahi sakta.
+Har koi (aur har AI) sab kuch nahi parh sakta ya badal sakta.
 
 ### Stable IDs
-Har zaroori piece ka ek permanent number ya code hota hai taake links aur citations kabhi na tootein.
+Har zaroori cheez ka apna permanent number ya code hota hai — bilkul jaise har bande ka apna CNIC number hota hai jo kabhi nahi badalta, chahe naam ya address badal jaye. Isi liye links aur citations kabhi toot-te nahi.
 
 ### Citations
-AI jawab dete waqt keh sakta hai "section 4.2 dekho" — isi se trust bana rehta hai.
+Jab AI jawab deta hai, wo keh sakta hai "section 4.2 dekho." Bharosa yahi se banta hai.
 
-Bade model mein ye Layer 1 hai. Yehi tool jo aaj book ko sambhalta hai, kal accounting rules ya medical protocols bhi sambhalega.
+Bade model mein ye Layer 1 hai. Jo tool aaj book sambhal raha hai, kal accounting rules ya medical protocols bhi sambhalega.
 
-### Stable ID ki analogy
-Stable ID ko aise socho jaise kisi legal textbook mein page reference jo edition badalne par bhi wahi rehta hai — aaj tum "section 4.2" cite karte ho, agle saal book update hone ke baad bhi wo citation sahi jagah point karti hai (ya saaf dikhati hai ke wo kahan shift hui). Stable IDs ke bagair, har update chupke se har citation tod deta aur kisi ko pata bhi na chalta jab tak masla na ho jaye.
+### Stable ID ka asal faida
+Socho har baar book update hoti aur purani citation kaam hi na kare — kitna bura hoga? Stable ID hone se update ke baad bhi citation ya to sahi jagah point karti hai, ya saaf dikha deti hai ke wo kahan shift hui. Warna har update chupke se saari purani citations tor deta, aur pata bhi kisi ko na chalta jab tak kuch ghalat na ho jata.
 
 ## Exam Mein Ye Kyun Aayega?
-
-System of Record ke bagair AI sirf ek smart guesser hai, is ke saath AI trustworthy ban jata hai — ye idea takriban har serious agent system ke neeche khada hai.
+System of Record ke bina AI sirf ek smart andaza lagane wala hai. Isके saath AI bharosemand ban jata hai. Har serious agent system ke neeche yahi idea baitha hota hai.

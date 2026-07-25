@@ -1,28 +1,32 @@
-# 44. Full Timed Mock Exam
+# 44. Full timed mock exam
 
 ## Aasan Zabaan Mein Samjho
+Asal exam timed hai aur high-stakes hai. Sabse achi preparation yehi hai ke same conditions mein ek poora mock diya jaaye: 100 multiple-choice sawal, 140 minutes, phone doosre kamre mein, koi interruption nahi.
 
-Asal exam timed aur high-stakes hota hai. Sab se acchi tayyari ye hai ke tum bilkul same conditions mein ek full mock do — 100 multiple-choice questions, 140 minutes mein, phone doosre kamre mein, koi disturbance nahi.
+100 sawal 140 minutes mein — matlab average 1.4 minute per sawal. Sirf knowledge kaafi nahi, pacing bhi practice karni padegi. Phone doosre kamre mein rakhna is liye zaroori hai taake kuch google karne ka temptation na ho, aur real exam conditions train ho.
 
-Socho jaise koi cricket match ke liye practice sirf nets mein shots maar ke nahi karta — pura match jaisa simulation karna parta hai, umpire, crowd, pressure sab ke sath. Mock exam wahi kaam karta hai — sirf topics nahi, waqt ke saath khelna bhi seekhata hai.
+Sirf 70 pe pass hona target mat rakho — 90+ ka target rakho. Ye tumse bache hue gaps close karwata hai aur confidence banata hai.
+
+Mock ke baad, jis-jis sawal pe guess kiya tha, unhe mark karo — ye pure gold hain, exactly bata dete hain kaunse topics abhi weak hain.
+
+Aur ek zaroori baat: ghalat jawab ki do alag wajahein ho sakti hain, aur timed mock hi ye batata hai kaunsi wali hai. Ek — knowledge gap: bas pata hi nahi tha. Doosri — pacing failure: pata tha, lekin time khatam ho gaya ya jaldi mein ghalat choose kar liya. Knowledge gap fix karna matlab us topic ka note dobara padhna. Pacing failure fix karna matlab clock ke neeche dobara practice karna, content dobara padhna nahi. Dono ko mix mat karo, warna baaki time waste hoga.
 
 ## Zaroori Concepts
 
-### 100 MCQs in 140 minutes
-Yani average 1.4 minute per question. Tumhe knowledge aur pacing dono practice karni hain.
+### 100 MCQs, 140 minutes
+Average 1.4 minute per sawal. Knowledge aur pacing dono practice karni hai.
 
-### Phone in another room
-Cheez dekhne ke temptation ko khatam karta hai aur asal exam ke conditions train karta hai.
+### Phone doosre kamre mein
+Google karne ka temptation hatata hai, real exam conditions train karta hai.
 
-### Target a score of 90+, not just a pass at 70
-Pass karna minimum hai. 90+ target karna tumhe baaki bachi hui kamiyan close karne pe majboor karta hai aur confidence banata hai.
+### Target 90+, sirf 70 pe pass nahi
+Passing minimum hai. 90+ ka target bache hue gaps close karwata hai aur confidence banata hai.
 
-### Mark every question you had to guess on
-Mock ke baad, jo bhi guess kiya tha wo pure sona hai — bilkul saaf batata hai kaunse topics abhi bhi kaam mangte hain.
+### Har guess wala sawal mark karo
+Mock ke baad guesses pure gold hain — exactly batate hain kaunse topics weak hain.
 
-### The two different kinds of failure a mock reveals
-Ghalat jawab ki do bilkul mukhtalif wajah ho sakti hain, aur sirf timed mock hi inhe alag kar sakta hai. Ek hai knowledge gap — tumhe concept hi nahi pata tha. Doosra hai pacing failure — pata tha, lekin waqt khatam ho gaya ya pressure mein jaldbazi mein ghalat select kar liya. Knowledge gap theek karne ke liye us topic ka note dobara padho. Pacing failure theek karne ke liye dobara clock ke sath practice karo, wo content dobara mat padho jo tumhe pehle se aata hai. In dono ko mix karna tumhara baqi bacha study time zaya karta hai.
+### Do alag tarah ki failure
+Knowledge gap (pata hi nahi tha) vs pacing failure (pata tha, time ya pressure mein galat kiya). Dono ka fix alag hai — inhe mix mat karo.
 
 ## Exam Mein Ye Kyun Aayega?
-
-Asal exam khud ek timed performance hai. Same constraints ke sath practice karna hi asal din se pehle pacing aur knowledge dono problems dhoondhne ka wahid tareeqa hai.
+Asal exam khud ek timed performance hai. Same constraints mein practice karna hi pacing aur knowledge problems ko real din se pehle pakadne ka tareeqa hai.

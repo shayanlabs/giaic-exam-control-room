@@ -2,37 +2,35 @@
 
 ## Aasan Zabaan Mein Samjho
 
-Harness banana kaam ka sirf aadha hissa hai. Us harness ko mahino aur saalon tak healthy rakhna dusra aadha hissa hai.
+Harness banana toh aadha kaam hai. Usay mahinon, saalon tak healthy rakhna doosra aadha kaam hai.
 
-Jo harness kabhi saaf nahi hoti, wo purani rules ka ek junk drawer ban jati hai — bilkul us almari ki tarah jisme har cheez thoons di gayi ho aur kuch bhi dhoond nahi paate. Ye agent ko dheema kar deti hai aur ajeeb bugs paida karti hai.
-
-Is part ka core idea ye hai ke harness bhi ek zinda cheez hai — agar isay maintain na kiya jaye, to ye khud hi problem ban jati hai. Rules ka dher, purani coupling, aur observability ki kami — sab milkar harness ko waqt ke sath kamzor karte hain.
+Jo harness kabhi saaf nahi hoti, wo purani rules ka junk drawer ban jati hai. Isse agent slow hota hai aur ajeeb ajeeb bugs paida hote hain.
 
 ## Zaroori Concepts
 
 ### Observability
-Jo tum dekh nahi sakte, usay improve nahi kar sakte. Tumhe logs, traces, aur numbers chahiye ke agent aur harness ne asal mein kya kiya.
+Jo tum dekh nahi sakte usay improve nahi kar sakte. Tumhe logs, traces, aur numbers chahiye ke agent aur harness ne asal mein kya kiya.
 
 ### Capability-control trade-off
-Zyada power aam tor par matlab kam control (aur ulta bhi sach hai). Har design choice is line par kahin na kahin baithti hai. Goal ye hai ke tum apna point jaan-boojh kar choose karo, power ko maximize karna maqsad nahi.
+Zyada power usually zyada kam control laati hai (aur ulta bhi). Har design choice is line par kahin na kahin baithi hoti hai. Goal ye hai ke apni jagah jaan bujh kar chuno, power ko maximize karna nahi.
 
 ### Harness coupling
-Harness aaj ke model ya tools ke exact behavior se kitni tight juri hui hai. Tight coupling harness ko todti hai jab models ya tools badal jate hain.
+Harness aaj ke model ya tools ke exact behavior se kitni tight bandhi hui hai. Tight coupling se harness tootne lagti hai jab models ya tools change hote hain.
 
 ### Rule debt
-Purani, overlapping, ya obsolete rules ka dher. Ye agent ko dheema aur system ko samajhna mushkil banata hai.
+Purani, overlapping, ya obsolete rules ka dher. Isse agent slow hota hai aur system samajhna mushkil ho jata hai.
 
 ### Contracts se couple karo, behaviors se nahi
-Stable success criteria aur interfaces ko prefer karo, is baat ki bajaye "isay bilkul waise karo jaise model X abhi kar raha hai."
+Stable success criteria aur interfaces ko prefer karo — "isko exactly waise karo jaise model X abhi karta hai" ki jagah.
 
-### 90-day rule for retiring rules
-Ek practical hygiene habit: har rule ko takreeban 90 din baad dobara dekhna chahiye aur ya to dobara justify karo ya hata do. Ye permanent rule debt ko rokta hai.
+### 90-day rule — rules retire karne ka
+Ek practical hygiene habit: har rule ko takreeban 90 din baad dobara dekho, aur ya to justify karo ya hata do. Isse permanent rule debt nahi banti.
 
-### Teen forces jo ratchet ko peeche dhakelte hain
-Ratchet sirf ek taraf ghoomta hai — tight — aur yehi uska khatra bhi hai. Teen forces isay control mein rakhti hain. **Capability-control trade-off**: har rule jo ek failure hataati hai, wo ek move bhi hata deti hai, is liye maximum tight harness minimum ambition ka kaam degi — raat ke loops real repos par tight chalte hain, ek throwaway prototype session loose chalta hai, aur craft yehi hai ke zyada tar kaam ko sahi jagah beech mein rakha jaye. **Harness coupling**: ek harness jo ek model ki ajeeb aadaton ke saath bohot tight tuned ho, chupke se usi model ka hissa ban jati hai — ek real example ye hai ke naya model generation same text ke liye takreeban 30% zyada tokens generate karta hai, jo purani model par measure kiye gaye har token budget ko chupke se tod deta hai. Iska defense *contracts* se couple hona hai (exit codes, schemas, tests), ek model ke *behavior* se nahi. **Rule debt**: rules-file ki har line har beat mein tokens kharch karti hai, har hook har action mein seconds kharch karta hai — ek one-time ajeebiyat jo permanent rule kama leti hai, wo safety nahi, junk hai, is liye rule set ko har mahine review karo aur jo rule 90 din mein nahi chala aur uske saath koi linked incident nahi, usay removal ka candidate samjho (secrets ke around walls iski ek exception hain, hamesha is pruning se safe).
+### Teen forces jo ratchet ko peeche khinchti hain
+Ratchet sirf ek taraf ghoomta hai — tight, aur yehi iska khatra bhi hai. Teen forces isay balance mein rakhti hain. **Capability-control trade-off**: har rule jo ek failure hataati hai, ek move bhi hata deti hai — isliye maximum tight harness minimum ambition wala kaam deti hai; real repos par overnight loops tight chalti hain, throwaway prototype session loose chalti hai, aur craft yehi hai ke zyada tar kaam beech mein sahi jagah rakha jaye. **Harness coupling**: ek harness jo ek model ki ajeeb habits ke bohot kareeb tune ho, chupke se usi model ka hissa ban jati hai — misaal ke taur par, naya model generation same text ke liye takreeban 30% zyada tokens generate karta hai, jo purane model par measure kiya har token budget chupke se tor deta hai. Iska defense hai *contracts* (exit codes, schemas, tests) se couple karna, na ke ek model ke *behavior* se. **Rule debt**: rules-file ki har line har beat tokens kharch karti hai, har hook har action mein seconds kharch karta hai — ek one-time ajeebogareeb cheez ko permanent rule bana dena safety nahi, junk hai; isliye rule set ko har mahine review karo, aur jo rule 90 din se nahi chali aur uska koi linked incident nahi, usay hatane ka candidate maano (secrets ke ird gird deewarein iski ek exception hain, ye pruning se hamesha safe hain).
 
-### Kab configuring rokni hai aur apni khud ki harness banani hai
-Vendor harness (Claude Code, OpenCode) ke saath tab tak raho jab tak uske surfaces tumhare rules express kar sakte hain — ye zyada tar logon ke liye, zyada tar waqt sahi hai, aur vendor ki harness free mein har hafte behtar hoti hai. Apni khud ki harness tab banao jab product ki deewarein kisi aisi requirement ko rok rahi hon jo tumhare paas waqai hai: apna khud ka tool interface, apna khud ka verification stack, apna khud ka deployment shape. Yehi threshold hai book ke Mode 2 material mein — Build AI Agents, Eval-Driven Development, aur Deploy the Agent Harness — jo wahi paanch verbs hain (constrain, inform, verify, correct, escalate), sirf zyada code mein likhe gaye hain, settings file ke zariye configure kiye jaane ki bajaye.
+### Configure karna kab rokna hai aur khud banana kab shuru karna hai
+Vendor harness (Claude Code, OpenCode) ke saath tab tak raho jab tak uski surfaces tumhare rules express kar sakein — zyada tar logon ke liye zyada tar waqt yehi kaafi hai, aur vendor ki harness har hafte free mein behtar hoti rehti hai. Apna khud ka harness sirf tab banao jab product ki deewarein us requirement ko rok rahi hon jo tumhare paas asal mein hai: apna tool interface, apna verification stack, apna deployment shape. Yehi threshold hai book ke Mode 2 material mein jaane ka — Build AI Agents, Eval-Driven Development, aur Deploy the Agent Harness — jo wahi paanch verbs hain (constrain, inform, verify, correct, escalate), bas zyada code mein likhe hue, kam settings file mein configure kiye hue.
 
 ## Exam Mein Ye Kyun Aayega?
-Harness banana kaam ka sirf aadha hissa hai. Usay healthy rakhna dusra aadha hai. Exam mein long-term maintenance habits ka pata hona zaroori hai.
+Harness banana sirf aadha kaam hai. Usay healthy rakhna doosra aadha hai. Exam ko long-term maintenance habits ka pata hona chahiye.

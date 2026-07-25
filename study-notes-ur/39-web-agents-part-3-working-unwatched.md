@@ -1,33 +1,26 @@
 # 39. Part 3 — Working Unwatched
 
 ## Aasan Zabaan Mein Samjho
+Ye poore stack ka asal maqsad hai — agent kaam kare jab tumhara koi bhi device online na ho. Pattern simple hai: brief do, plan dekho, approve karo, phir jab kaam ho jaaye to review karo. Koi bhi step skip kiya to risk badh jaata hai.
 
-Ye poori web-agents stack ka asal maqsad hai — agent tumhare kisi bhi device ke online hue bina useful kaam kar sake. Iska tareeqa ek clear delegation loop hai jisme scheduled execution aur explicit reporting shamil hai.
-
-Socho jaise tum kisi trusted assistant ko ek kaam de kar chutti pe chale jao — pehle tum usse brief karte ho, wo apna plan batata hai, tum approve karte ho, phir wo kaam karta hai, aur wapis aa kar tum uska review karte ho. Agar tum in steps mein se koi bhi skip karo, risk barh jata hai.
-
-Sabse important cheez samajhne wali ye hai ke sirf "report banana" aur "asal duniya mein action lena" mein zameen-aasman ka farq hai — permission boundary bilkul clear honi chahiye.
+Sochne wali baat: desktop agent pe tum kaam chalte hue dekh sakte ho, beech mein rok sakte ho. Web surface pe tum chale jaate ho — yehi to poora point hai — isliye plan step hi tumhara asli, shayad akela, intercept hota hai niyat aur finished kaam ke beech. Agar "pehle apna plan batao, phir meri approval ka wait karo" wali line skip ki, to pehli baar galti tab pakdi jaayegi jab wo poori task mein har file ke saath ho chuki hogi. Plan review mein bas 4 cheezein check karo, do minute lagte hain: scope sirf wahi hai jo maine bola tha? koi cheez verify hone se pehle act to nahi kar rahi? koi connector ya send maanga jo maine nahi maanga tha? format ya audience ke baare mein kya chup-chap assume kar liya? Ek line ka redirect plan stage pe kuch nahi lagta, lekin ek confidently execute ho chuki galti saaf karne mein poora din lag sakta hai.
 
 ## Zaroori Concepts
 
-### The delegation loop
-brief → plan → approve → review. Tum clear brief dete ho, system plan proposes karta hai, tum approve karte ho, kaam hota hai, phir tum review karte ho. Koi bhi step skip karna risk barhata hai.
+### Delegation loop
+Brief → plan → approve → review. Clear brief do, system plan proposal kare, tum approve karo, kaam ho, phir review karo.
 
-### Scheduled tasks with no device online
-Technical haqeeqat ye hai ke session vendor ke servers pe rehta hai aur schedule pe chal sakta hai chahe tumhara koi bhi laptop ya phone band ho.
+### Scheduled tasks, koi device online nahi
+Session vendor ke servers pe rehta hai, schedule pe fire ho sakta hai chahe tumhare saare laptop-phone off hon.
 
-### The 4 answers of a schedule
-Achi schedule configuration char sawalon ka jawab deti hai: kab chalega, kya karne ki ijazat hai, kaise report karega, aur fail hone pe kya hoga.
+### Schedule ke 4 jawab
+Achi schedule config batati hai: kab chalega, kya karne ki ijazat hai, kaise report karega, aur fail hone pe kya hoga.
 
 ### Reporting vs acting
-Ek agent jo sirf report banata hai aur ek agent jo asal duniya mein action bhi le sakta hai — dono mein bara farq hai. Permission boundary explicit honi chahiye.
+Sirf report dene wale agent aur duniya mein actions le sakne wale agent mein bada farq hai. Permission boundary clear honi chahiye.
 
-### Why the plan step is the real safety net
-Desktop agent pe tum kaam chalte hue dekh sakte ho aur beech mein rok sakte ho. Web surface pe tum chale jate ho — yehi to iska point hai — is liye plan hi tumhara ikalauta intercept hota hai galti pakadne ka. Plan review karte waqt char cheezein 2 minute mein check karo: scope sirf wahi hai jo tumne kaha tha? Kuch verify hone se pehle act to nahi kar raha? Koi connector ya send jo tumne nahi manga wo use to nahi ho raha? Aur format/audience ke baare mein wo chupke se kya assume kar raha hai? Ek line ka redirect plan stage pe free hai; ek confidently execute hui ghalat run saaf karne mein poora din lag jata hai.
-
-### The invoicing example: reporting vs acting, made concrete
-Ayesha do scheduled tasks chahti hai — Monday morning unpaid invoices ka summary (sirf read aur report), aur Friday ko late clients ko automatic payment reminder emails. Monday wala reporting hai — ghalat hafta bas rewrite ki keemat rakhta hai. Friday wala **act** karta hai duniya mein unattended — ghalat run sach much clients ko email bhej degi bina kisi check ke. Farq ka ek lafz: **acting** vs reporting.
+### Ayesha ki misaal — report vs act
+Ayesha do scheduled tasks chahti hai: Monday morning unpaid invoices ka summary (Drive se padho, brief account mein save karo) — ye reporting hai, ghalat week ka matlab bas rewrite. Aur Friday ko har late client ko automatic payment reminder email — ye act karna hai, duniya mein bahar, unattended, cadence pe, aur ghalat run ka matlab real clients ko galat email jaana, bina kisi check ke. Ek lafz ka farq — **acting** vs reporting — decide karta hai kya abhi safe hai aur kya deeper tooling (checker, stopping condition, saved state) ka wait kare.
 
 ## Exam Mein Ye Kyun Aayega?
-
-True unattended kaam hi is poore course ka economic aur practical justification hai — exam expect karta hai tum delegation pattern aur safety boundaries dono samjho.
+Sach mein bina dekhe kaam hona hi is poori chain ki economic wajah hai. Exam mein delegation pattern aur safety boundaries ki samajh chahiye.

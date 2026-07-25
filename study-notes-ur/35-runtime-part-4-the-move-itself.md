@@ -1,31 +1,29 @@
 # 35. Part 4 — The Move Itself
 
 ## Aasan Zabaan Mein Samjho
+Dekho, ek chalta-phirta loop utha kar naye ghar shift karna — jitna aasan sunta hai utna hai nahi. Achi cheezein, jaise discipline aur good ideas, tumhare saath chali aati hain. Lekin concrete mechanics — file paths, hooks, credential setup — usually dobara banane padte hain. Aur sabse important: sirf isliye ke loop laptop pe safe tha, naye runtime mein bhi safe hoga ye guarantee nahi hai. Trust dobara kamana padta hai, transfer nahi hoti.
 
-Ek chalte hue loop ko ek jagah se dusri jagah move karna utna aasan nahi jitna dikhta hai. Socho jaise koi ghar shift ho raha ho — tumhari acchi aadatein aur discipline tumhare sath chali jayengi, lekin furniture, wires, aur connections nayi jagah dobara set karni parti hain. Purane ghar mein jo bharosa tha wo automatically naye ghar transfer nahi hota — wahan dobara kamana parta hai.
-
-Yehi baat loop ke sath hai — jo cheezein important hain (rules, evaluation suite, success criteria) wo tumhare sath travel karti hain, lekin mechanics — file paths, exact hooks, credential setup — usually dobara banani parti hain. Aur sirf isliye ke wo tumhare laptop pe safe tha, iska matlab nahi wo naye ghar mein bhi safe hoga — validate dobara karna parega.
+To sawal ye hai: suitcase mein kya rakhna hai, aur kya peechhe chhod dena hai?
 
 ## Zaroori Concepts
 
-### The suitcase test
-Jo cheezein sach mein tumhare sath aani chahiyein: specifications, skills, evaluation suite, spine format, success criteria. Baaqi sab saman hai jo shayad replace karna pare.
+### Suitcase test
+Jo saath aana chahiye: spec (job kya hai, "done" ka matlab kya hai), rubric aur uske anchors, golden set (har case ki `origin` line aur baseline ke saath), ratchet log (pakde gaye failures ki list), maker-checker split, aur human gate. Jo peechhe chhoot jaata hai: CLI flags, output formats, file paths, session state, ek runtime ke API pe likha code, purane ghar ke cost assumptions.
 
-### Trust is re-earned, not transferred
-Loop laptop pe safe tha, lekin naye runtime mein bhi safe hoga ye guarantee nahi — dobara test karna zaroori hai.
+### Trust dobara kamai jaati hai, transfer nahi hoti
+Laptop pe safe hona naye runtime mein safety guarantee nahi deta. Dobara validate karna zaroori hai.
 
-### Discipline travels but mechanics get rebuilt
-Maker-checker ka idea, spine ka concept, stop conditions — ye sab travel karte hain. Lekin exact hooks, file paths, credential injection dobara implement karna parta hai.
+### Discipline travel karti hai, mechanics rebuild hoti hain
+Maker-checker idea, spine concept, stop conditions — ye travel karte hain. Exact hooks, file paths, credential injection — ye usually dobara banane padte hain.
 
-### The arrival protocol
-Nayi jagah pohanchne ka ek tarteeb wala tareeqa: full rule set category ke hisaab se organize karo, quality bars ko neeche mat karo "sirf move ki wajah se", aur probation period rakho jahan extra monitoring ho jab tak full trust na bane.
+### Arrival protocol
+Naye ghar mein pahunch kar ye sequence follow karo:
+1. Poora rule set, category ke hisaab se organize kiya hua.
+2. Quality bars wahi rakho — "sirf move ke liye" standard neeche mat lao.
+3. Probation period — extra monitoring ke saath, full trust milne se pehle.
 
-### What travels vs. what gets rebuilt, concretely
-Suitcase mein jo jata hai: spec, rubric with anchors, golden set (har case ki origin line aur baselines ke sath), ratchet log, maker-checker split, human gate. Jo peeche reh jata hai: CLI flags, output formats, file paths, session state, purane runtime ka API-specific code, aur purani cost assumptions. Yaad rakhne wala ek rule: repo hi truth rakhta hai, aur har home ussi se configure hota hai — jo rule sirf vendor-side setting mein rehta hai, wo suitcase se chupke nikal jata hai.
-
-### A worked example: a "regression" that was really a suitcase bug
-Ek case mein Home 2 pe move karne se score 35/36 se 33/36 pe girta hai. Ek case flake tha (dobara chalane pe pass ho gaya — noise), lekin dusra miss har baar reproduce hota hai — pata chalta hai ek fixture purane laptop ke absolute file path se read kar raha tha. Ye agent ki regression nahi thi, ye suitcase error thi. Fix ye hua ke path relative banaya gaya aur ussi commit mein re-baseline kiya gaya.
+### Ek "regression" jo asal mein suitcase bug tha
+Ek move Home 2 pe hua, score 35/36 se 33/36 pe gir gaya. Ek case bas flaky nikla (re-run pe pass ho gaya), lekin dusra miss har baar reproduce hua — wajah thi ek fixture jo purane laptop ka absolute file path use kar rahi thi. Ye asli regression nahi tha, suitcase error tha. Fix simple: path ko relative banao, aur usi commit mein re-baseline karo.
 
 ## Exam Mein Ye Kyun Aayega?
-
-Bahut se systems move ke dauran chupke se toot jate hain — exam expect karta hai ke tum jaano move khud ek serious engineering problem hai.
+Bohot saare systems move ke dauran chupke se toot jaate hain. Move khud ek serious engineering problem hai — exam mein yehi samajh chahiye.
