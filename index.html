@@ -90,9 +90,12 @@
   .open-link:hover{text-decoration:underline;}
   .empty-hint{color:var(--text-faint); font-size:11px; padding:5px 2px; font-style:italic;}
 
-  .note-btn{width:100%; margin-top:7px; background:var(--gold-soft); border:1px solid #4a3c22; color:var(--gold);
-    font-family:'IBM Plex Mono',monospace; font-size:10.5px; padding:6px 8px; border-radius:6px; cursor:pointer;}
+  .note-btn-row{display:flex; gap:5px; margin-top:7px;}
+  .note-btn{flex:1; background:var(--gold-soft); border:1px solid #4a3c22; color:var(--gold);
+    font-family:'IBM Plex Mono',monospace; font-size:10px; padding:6px 4px; border-radius:6px; cursor:pointer;}
   .note-btn:hover{background:#3d3120; border-color:var(--gold);}
+  .note-btn.ur{background:var(--teal-soft); border-color:#234641; color:var(--teal);}
+  .note-btn.ur:hover{background:#1c322e; border-color:var(--teal);}
 
   .note-modal-overlay{display:none; position:fixed; inset:0; background:rgba(10,12,15,.72); z-index:100;
     align-items:center; justify-content:center; padding:24px;}
@@ -207,6 +210,7 @@
 </div>
 
 <script src="assets/js/notes-data.js"></script>
+<script src="assets/js/notes-data-ur.js"></script>
 <script>
 const B='https://agentfactory.panaversity.org/docs/';
 const TASKS=[
@@ -319,7 +323,10 @@ function board(){
           <button class="mbtn" ${i===0?'disabled':''} onclick="mv('${t.id}',-1)">‹</button>
           <button class="mbtn" ${i===4?'disabled':''} onclick="mv('${t.id}',1)">›</button>
         </div>${link}</div>
-        <button class="note-btn" onclick="openNote('${t.id}')">📖 Open Note (English)</button>
+        <div class="note-btn-row">
+          <button class="note-btn" onclick="openNote('${t.id}','en')">🇬🇧 English</button>
+          <button class="note-btn ur" onclick="openNote('${t.id}','ur')">🇵🇰 Urdu</button>
+        </div>
       </div>`;
     }).join('')||'<div class="empty-hint">— empty —</div>';
     return `<div class="col"><div class="col-head"><span class="col-title">${LBL[col]}</span>
@@ -333,8 +340,9 @@ window.mv=function(id,d){
   save(); board();
 };
 
-window.openNote=function(id){
-  const note = (typeof NOTES !== 'undefined') && NOTES[id];
+window.openNote=function(id,lang){
+  const src = lang==='ur' ? (typeof NOTES_UR!=='undefined' && NOTES_UR) : (typeof NOTES!=='undefined' && NOTES);
+  const note = src && src[id];
   if(!note) return;
   document.getElementById('noteModalTitle').textContent = note.title || '';
   document.getElementById('noteModalBody').innerHTML = note.html || '';
