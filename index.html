@@ -201,15 +201,15 @@ const COL_LABEL = {backlog:'Backlog', thisweek:'This Week', inprogress:'In Progr
 let state = {};
 let activeFilter = 'all';
 
-async function loadState(){
+function loadState(){
   try{
-    const res = await window.storage.get('giaic-kanban-state');
-    if(res && res.value) state = JSON.parse(res.value);
+    const raw = localStorage.getItem('giaic-kanban-state');
+    if(raw) state = JSON.parse(raw);
   }catch(e){ state = {}; }
   TASKS.forEach(t => { if(!state[t.id]) state[t.id] = 'backlog'; });
 }
-async function saveState(){
-  try{ await window.storage.set('giaic-kanban-state', JSON.stringify(state)); }
+function saveState(){
+  try{ localStorage.setItem('giaic-kanban-state', JSON.stringify(state)); }
   catch(e){ console.error('save failed', e); }
 }
 
@@ -280,15 +280,15 @@ document.getElementById('filters').addEventListener('click', (e) => {
   renderBoard();
 });
 
-document.getElementById('resetBtn').addEventListener('click', async () => {
+document.getElementById('resetBtn').addEventListener('click', () => {
   TASKS.forEach(t => state[t.id] = 'backlog');
-  await saveState();
+  saveState();
   renderBoard();
 });
 
-(async function init(){
+(function init(){
   renderStations();
-  await loadState();
+  loadState();
   renderBoard();
 })();
 </script>
