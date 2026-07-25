@@ -77,8 +77,9 @@
     background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--slate);
     border-radius:8px; padding:10px 11px; font-size:13px; line-height:1.4;
     cursor:grab; transition:opacity .12s ease, transform .12s ease;
+    touch-action:none; user-select:none;
   }
-  .card.dragging{opacity:.4; cursor:grabbing;}
+  .card.dragging{opacity:.4; cursor:grabbing; box-shadow:0 6px 18px rgba(0,0,0,.35);}
   .card.pri-must{border-left-color:var(--gold);}
   .card.pri-should{border-left-color:var(--teal);}
   .card.pri-could{border-left-color:var(--slate);}
@@ -246,7 +247,7 @@ function renderBoard(){
       const idx = COLS.indexOf(state[t.id]);
       const link = t.url ? `<a class="open-link" href="${t.url}" target="_blank" rel="noopener">↗ open</a>` : `<span></span>`;
       return `
-      <div class="card pri-${t.priority}" draggable="true" data-id="${t.id}">
+      <div class="card pri-${t.priority}" data-id="${t.id}">
         <div class="mod"><span>${t.module}</span><span class="wk">Wk ${t.week}</span></div>
         <div class="title">${t.title}</div>
         <div class="row">
@@ -274,62 +275,65 @@ window.moveCard = function(id, dir){
   renderBoard();
 };
 
-let draggedId = null;
-
 function clearDragOver(){
   document.querySelectorAll('.cards.drag-over').forEach(el => el.classList.remove('drag-over'));
 }
 
 function initDragAndDrop(){
+  // Pointer Events cover mouse, touch and pen with one code path, unlike the
+  // HTML5 drag-and-drop API which never fires on touchscreens.
   const board = document.getElementById('board');
+  const THRESHOLD = 6;
+  let sourceId = null, activeCard = null, pointerId = null;
+  let startX = 0, startY = 0, dragging = false;
 
-  board.addEventListener('dragstart', (e) => {
+  board.addEventListener('pointerdown', (e) => {
+    if(e.button !== undefined && e.button !== 0) return;
+    if(e.target.closest('button, a')) return;
     const card = e.target.closest('.card');
     if(!card) return;
-    draggedId = card.dataset.id;
-    card.classList.add('dragging');
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', draggedId);
+    sourceId = card.dataset.id;
+    activeCard = card;
+    pointerId = e.pointerId;
+    startX = e.clientX; startY = e.clientY;
+    dragging = false;
   });
 
-  board.addEventListener('dragend', (e) => {
-    const card = e.target.closest('.card');
-    if(card) card.classList.remove('dragging');
-    clearDragOver();
-    draggedId = null;
-  });
-
-  board.addEventListener('dragover', (e) => {
-    const list = e.target.closest('.cards');
-    if(!list) return;
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    if(!list.classList.contains('drag-over')){
-      clearDragOver();
-      list.classList.add('drag-over');
+  board.addEventListener('pointermove', (e) => {
+    if(!sourceId || e.pointerId !== pointerId) return;
+    if(!dragging){
+      if(Math.abs(e.clientX-startX) < THRESHOLD && Math.abs(e.clientY-startY) < THRESHOLD) return;
+      dragging = true;
+      activeCard.classList.add('dragging');
+      activeCard.setPointerCapture?.(pointerId);
     }
-  });
-
-  board.addEventListener('dragleave', (e) => {
-    const list = e.target.closest('.cards');
-    if(!list || list.contains(e.relatedTarget)) return;
-    list.classList.remove('drag-over');
-  });
-
-  board.addEventListener('drop', (e) => {
-    const list = e.target.closest('.cards');
-    if(!list) return;
     e.preventDefault();
-    const id = draggedId || e.dataTransfer.getData('text/plain');
-    const col = list.dataset.col;
-    if(id && col && state[id]){
-      state[id] = col;
-      saveState();
-      renderBoard();
+    const under = document.elementFromPoint(e.clientX, e.clientY);
+    const list = under && under.closest('.cards');
+    clearDragOver();
+    if(list) list.classList.add('drag-over');
+  });
+
+  function finish(e){
+    if(sourceId && dragging){
+      const under = document.elementFromPoint(e.clientX, e.clientY);
+      const list = under && under.closest('.cards');
+      if(list){
+        state[sourceId] = list.dataset.col;
+        saveState();
+      }
+    }
+    if(activeCard){
+      activeCard.classList.remove('dragging');
+      activeCard.releasePointerCapture?.(pointerId);
     }
     clearDragOver();
-    draggedId = null;
-  });
+    if(dragging) renderBoard();
+    sourceId = null; activeCard = null; pointerId = null; dragging = false;
+  }
+
+  board.addEventListener('pointerup', (e) => { if(e.pointerId === pointerId) finish(e); });
+  board.addEventListener('pointercancel', (e) => { if(e.pointerId === pointerId) finish(e); });
 }
 
 document.getElementById('filters').addEventListener('click', (e) => {
