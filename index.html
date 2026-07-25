@@ -71,11 +71,14 @@
   .col-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; padding:0 2px;}
   .col-title{font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-dim);}
   .col-count{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-faint); background:var(--surface-2); padding:1px 7px; border-radius:999px;}
-  .cards{display:flex; flex-direction:column; gap:8px; min-height:40px;}
+  .cards{display:flex; flex-direction:column; gap:8px; min-height:40px; border-radius:6px; transition:background .12s ease, box-shadow .12s ease;}
+  .cards.drag-over{background:var(--surface-2); box-shadow:inset 0 0 0 2px var(--gold);}
   .card{
     background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--slate);
     border-radius:8px; padding:10px 11px; font-size:13px; line-height:1.4;
+    cursor:grab; transition:opacity .12s ease, transform .12s ease;
   }
+  .card.dragging{opacity:.4; cursor:grabbing;}
   .card.pri-must{border-left-color:var(--gold);}
   .card.pri-should{border-left-color:var(--teal);}
   .card.pri-could{border-left-color:var(--slate);}
@@ -168,7 +171,7 @@
   </div>
 
   <footer>
-    <b>How to use this:</b> move each card forward or back with ‹ › (Backlog → This Week → In Progress → Self-Test → Mastered). The "↗" link takes you straight to that module's exact page or section. Every chapter ends with "Check Yourself" boxes, and many have a "Test Your Understanding" quiz plus flashcards — use these as your informal MCQ practice, since the format matches the real exam closely.<br>
+    <b>How to use this:</b> drag and drop any card into another column, or use ‹ › to move it one step at a time (Backlog → This Week → In Progress → Self-Test → Mastered). The "↗" link takes you straight to that module's exact page or section. Every chapter ends with "Check Yourself" boxes, and many have a "Test Your Understanding" quiz plus flashcards — use these as your informal MCQ practice, since the format matches the real exam closely.<br>
     <b>Want this on Trello?</b> If you'd like to connect your Trello account, that option can be added separately in this chat — let me know once it's connected, and I'll rebuild this same board directly in Trello.
     <button class="reset-btn" id="resetBtn">Reset progress</button>
   </footer>
@@ -243,7 +246,7 @@ function renderBoard(){
       const idx = COLS.indexOf(state[t.id]);
       const link = t.url ? `<a class="open-link" href="${t.url}" target="_blank" rel="noopener">↗ open</a>` : `<span></span>`;
       return `
-      <div class="card pri-${t.priority}">
+      <div class="card pri-${t.priority}" draggable="true" data-id="${t.id}">
         <div class="mod"><span>${t.module}</span><span class="wk">Wk ${t.week}</span></div>
         <div class="title">${t.title}</div>
         <div class="row">
@@ -258,7 +261,7 @@ function renderBoard(){
 
     return `<div class="col">
       <div class="col-head"><span class="col-title">${COL_LABEL[col]}</span><span class="col-count">${items.length}</span></div>
-      <div class="cards">${cards}</div>
+      <div class="cards" data-col="${col}">${cards}</div>
     </div>`;
   }).join('');
 }
@@ -270,6 +273,64 @@ window.moveCard = function(id, dir){
   saveState();
   renderBoard();
 };
+
+let draggedId = null;
+
+function clearDragOver(){
+  document.querySelectorAll('.cards.drag-over').forEach(el => el.classList.remove('drag-over'));
+}
+
+function initDragAndDrop(){
+  const board = document.getElementById('board');
+
+  board.addEventListener('dragstart', (e) => {
+    const card = e.target.closest('.card');
+    if(!card) return;
+    draggedId = card.dataset.id;
+    card.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', draggedId);
+  });
+
+  board.addEventListener('dragend', (e) => {
+    const card = e.target.closest('.card');
+    if(card) card.classList.remove('dragging');
+    clearDragOver();
+    draggedId = null;
+  });
+
+  board.addEventListener('dragover', (e) => {
+    const list = e.target.closest('.cards');
+    if(!list) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    if(!list.classList.contains('drag-over')){
+      clearDragOver();
+      list.classList.add('drag-over');
+    }
+  });
+
+  board.addEventListener('dragleave', (e) => {
+    const list = e.target.closest('.cards');
+    if(!list || list.contains(e.relatedTarget)) return;
+    list.classList.remove('drag-over');
+  });
+
+  board.addEventListener('drop', (e) => {
+    const list = e.target.closest('.cards');
+    if(!list) return;
+    e.preventDefault();
+    const id = draggedId || e.dataTransfer.getData('text/plain');
+    const col = list.dataset.col;
+    if(id && col && state[id]){
+      state[id] = col;
+      saveState();
+      renderBoard();
+    }
+    clearDragOver();
+    draggedId = null;
+  });
+}
 
 document.getElementById('filters').addEventListener('click', (e) => {
   const chip = e.target.closest('.chip');
@@ -290,6 +351,7 @@ document.getElementById('resetBtn').addEventListener('click', () => {
   renderStations();
   loadState();
   renderBoard();
+  initDragAndDrop();
 })();
 </script>
 </body>
