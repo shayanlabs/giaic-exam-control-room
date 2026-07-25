@@ -128,7 +128,7 @@
 <div class="wrap">
   <p class="eyebrow">P3-FDEAGA · FDE–Agent Factory Model &amp; Advanced General Agents</p>
   <h1>Exam Control Room</h1>
-  <p class="sub">Aapka poora prep roadmap ek hi board par — Kanban se track karo, MoSCoW se priority set karo, Eisenhower se roz ka time decide karo. Progress is browser mein save hoti rahegi.</p>
+  <p class="sub">Your whole study plan on one board — track it with Kanban, set priorities with MoSCoW, and plan your daily time with the Eisenhower matrix. Your progress is saved in this browser.</p>
 
   <div class="stations" id="stations"></div>
 
@@ -150,26 +150,26 @@
   <div class="grid2">
     <div class="panel">
       <h2>MoSCoW — priority key</h2>
-      <div class="moscow-row"><div class="dot" style="background:var(--gold)"></div><div><b>Must</b><p>Loop Engineering, Harness Engineering, Evals, Runtime (Leaving the Laptop) + Roles. Ye 5 sub-topics sab se dense hain (12–15 concepts each) — exam ka bulk yahin se aayega.</p></div></div>
-      <div class="moscow-row"><div class="dot" style="background:var(--teal)"></div><div><b>Should</b><p>Ecosystem aur General Agents on the Web. Vocabulary-heavy — good scoring agar Must topics solid hon.</p></div></div>
-      <div class="moscow-row"><div class="dot" style="background:var(--slate)"></div><div><b>Could</b><p>Local AI: Agentic Coding — chota, hands-on module. Last mein karo agar time bache.</p></div></div>
-      <div class="moscow-row"><div class="dot" style="background:var(--brick)"></div><div><b>Won't (abhi)</b><p>Syllabus se bahar ke book chapters (Mode 2, Python, etc.) — exam sirf un 8 official links tak limited hai, unme mat bhatakna.</p></div></div>
+      <div class="moscow-row"><div class="dot" style="background:var(--gold)"></div><div><b>Must</b><p>Loop Engineering, Harness Engineering, Evals, Runtime (Leaving the Laptop) + Roles. These 5 sub-topics are the biggest (12–15 concepts each) — most of the exam will come from here.</p></div></div>
+      <div class="moscow-row"><div class="dot" style="background:var(--teal)"></div><div><b>Should</b><p>Ecosystem and General Agents on the Web. Full of key terms — easy to score well here once the Must topics are solid.</p></div></div>
+      <div class="moscow-row"><div class="dot" style="background:var(--slate)"></div><div><b>Could</b><p>Local AI: Agentic Coding — a small, hands-on module. Study this last, if you have extra time.</p></div></div>
+      <div class="moscow-row"><div class="dot" style="background:var(--brick)"></div><div><b>Won't (for now)</b><p>Book chapters outside the syllabus (Mode 2, Python, etc.) — the exam only covers the 8 official links, so don't get distracted by extra material.</p></div></div>
     </div>
 
     <div class="panel">
-      <h2>Eisenhower — roz ka time kaise baante</h2>
+      <h2>Eisenhower — how to split your daily time</h2>
       <div class="eisen">
-        <div class="eq q1"><b>Urgent + Important</b>Aaj/kal Must topics ki fresh reading — Loop, Harness, Evals, Runtime. <span>Deep-focus hours yahan.</span></div>
-        <div class="eq q2"><b>Important, not Urgent</b>Flashcards + "Check Yourself" boxes ka spaced revision, mock quiz banana. <span>Schedule karo, skip mat karo.</span></div>
-        <div class="eq q3"><b>Urgent, not Important</b>Zia Tutor AI access check, marathon section (A/B/C) confirm, exam date announcement dekhna. <span>2 min mein nipta do.</span></div>
-        <div class="eq q4"><b>Neither</b>Bonus book chapters, extra YouTube deep-dives. <span>Sirf agar sab kuch green ho.</span></div>
+        <div class="eq q1"><b>Urgent + Important</b>Fresh reading of Must topics, today or tomorrow — Loop, Harness, Evals, Runtime. <span>Use your best focus hours for this.</span></div>
+        <div class="eq q2"><b>Important, not Urgent</b>Spaced revision of flashcards and "Check Yourself" boxes, and building a mock quiz. <span>Schedule it — don't skip it.</span></div>
+        <div class="eq q3"><b>Urgent, not Important</b>Check Zia Tutor AI access, confirm your marathon section (A/B/C), check the exam date announcement. <span>Finish these in 2 minutes.</span></div>
+        <div class="eq q4"><b>Neither</b>Bonus book chapters, extra YouTube deep-dives. <span>Only if everything else is already done.</span></div>
       </div>
     </div>
   </div>
 
   <footer>
-    <b>Kaise use karein:</b> har card ko ‹ › se aage/peeche move karo (Backlog → This Week → In Progress → Self-Test → Mastered). "↗" har module ke exact page/section par le jata hai. Har chapter ke end mein "Check Yourself" boxes aur kai jagah "Test Your Understanding" quiz + Flashcards hain — inhe hi apna informal MCQ practice bana lo, kyunki format bilkul exam jaisa hai.<br>
-    <b>Trello chahiye?</b> Agar aap apna Trello account connect karna chahein, wo option is chat mein alag se aa sakta hai — connect karne ke baad bata dena, main yehi board seedha Trello mein bana dunga.
+    <b>How to use this:</b> move each card forward or back with ‹ › (Backlog → This Week → In Progress → Self-Test → Mastered). The "↗" link takes you straight to that module's exact page or section. Every chapter ends with "Check Yourself" boxes, and many have a "Test Your Understanding" quiz plus flashcards — use these as your informal MCQ practice, since the format matches the real exam closely.<br>
+    <b>Want this on Trello?</b> If you'd like to connect your Trello account, that option can be added separately in this chat — let me know once it's connected, and I'll rebuild this same board directly in Trello.
     <button class="reset-btn" id="resetBtn">Reset progress</button>
   </footer>
 </div>
@@ -254,7 +254,7 @@ function renderBoard(){
           ${link}
         </div>
       </div>`;
-    }).join('') || `<div class="empty-hint">— khaali —</div>`;
+    }).join('') || `<div class="empty-hint">— empty —</div>`;
 
     return `<div class="col">
       <div class="col-head"><span class="col-title">${COL_LABEL[col]}</span><span class="col-count">${items.length}</span></div>
