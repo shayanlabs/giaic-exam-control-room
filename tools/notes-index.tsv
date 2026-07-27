@@ -1,0 +1,47 @@
+id	en_file	ur_file	title
+r1	01-the-generalist-core.md	01-the-generalist-core.md	The Intent Bottleneck and the Generalist Core
+r2	02-the-forward-deployed-engineer.md	02-the-forward-deployed-engineer.md	The Forward Deployed Engineer
+r3	03-supporting-and-bounded-roles.md	03-supporting-and-bounded-roles.md	Supporting and bounded roles
+r4	04-roles-appendices-a-b-c.md	04-roles-appendices-a-b-c.md	Roles appendices (A/B/C)
+e1	05-ecosystem-overview.md	05-ecosystem-overview.md	Ecosystem overview
+e2	06-system-of-record.md	06-system-of-record.md	System of Record
+e3	07-zia-tutor-ai-zia-developer-ai.md	07-zia-tutor-ai-zia-developer-ai.md	Zia Tutor AI + Zia Developer AI
+e4	09-fde-af-model-i-the-five-layers.md	09-fde-af-model-i-the-five-layers.md	FDE AF Model I — the five layers
+e5	10-fde-af-model-ii-the-one-law.md	10-fde-af-model-ii-the-one-law.md	FDE AF Model II — the one law
+e6	11-fde-af-model-iii-the-business-layer.md	11-fde-af-model-iii-the-business-layer.md	FDE AF Model III — the business layer
+e7	08-choosing-your-vertical.md	08-choosing-your-vertical.md	Choosing Your Vertical
+l1	12-loop-engineering-part-1-the-shift.md	12-loop-engineering-part-1-the-shift.md	Part 1 — The Shift
+l2	13-loop-engineering-part-2-the-heartbeat.md	13-loop-engineering-part-2-the-heartbeat.md	Part 2 — The Heartbeat
+l3	14-loop-engineering-part-3-the-body.md	14-loop-engineering-part-3-the-body.md	Part 3 — The Body
+l4	15-loop-engineering-part-4-the-spine.md	15-loop-engineering-part-4-the-spine.md	Part 4 — The Spine
+l5	16-loop-engineering-part-5-a-complete-loop-twice.md	16-loop-engineering-part-5-a-complete-loop-twice.md	Part 5 — A Complete Loop, Twice
+l6	17-loop-engineering-part-6-keeping-human-control.md	17-loop-engineering-part-6-keeping-human-control.md	Part 6 — Keeping Human Control
+l7	18-graph-engineering.md	18-graph-engineering.md	Graph Engineering
+l8	19-routines-appendix.md	19-routines-appendix.md	Routines appendix
+h1	20-harness-engineering-part-1-the-box.md	20-harness-engineering-part-1-the-box.md	Part 1 — The Box
+h2	21-harness-engineering-part-2-constrain.md	21-harness-engineering-part-2-constrain.md	Part 2 — Constrain
+h3	22-harness-engineering-part-3-inform.md	22-harness-engineering-part-3-inform.md	Part 3 — Inform
+h4	23-harness-engineering-part-4-verify-correct.md	23-harness-engineering-part-4-verify-correct.md	Part 4 — Verify & Correct
+h5	24-harness-engineering-part-5-a-complete-harness.md	24-harness-engineering-part-5-a-complete-harness.md	Part 5 — A Complete Harness
+h6	25-harness-engineering-part-6-staying-the-engineer.md	25-harness-engineering-part-6-staying-the-engineer.md	Part 6 — Staying the Engineer
+h7	26-hooks-appendix.md	26-hooks-appendix.md	Hooks appendix
+v1	27-evals-part-1-the-problem-with-pass.md	27-evals-part-1-the-problem-with-pass.md	Part 1 — The Problem with PASS
+v2	28-evals-part-2-the-golden-set.md	28-evals-part-2-the-golden-set.md	Part 2 — The Golden Set
+v3	29-evals-part-3-calibrating-the-judge.md	29-evals-part-3-calibrating-the-judge.md	Part 3 — Calibrating the Judge
+v4	30-evals-part-4-evals-in-the-loop.md	30-evals-part-4-evals-in-the-loop.md	Part 4 — Evals in the Loop
+v5	31-evals-parts-5-6-the-12-case-suite-and-staying-honest.md	31-evals-parts-5-6-the-12-case-suite-and-staying-honest.md	Parts 5 + 6 — The 12-case suite and staying honest
+t1	32-runtime-part-1-the-last-dependency.md	32-runtime-part-1-the-last-dependency.md	Part 1 — The Last Dependency
+t2	33-runtime-part-2-headless-is-the-bridge.md	33-runtime-part-2-headless-is-the-bridge.md	Part 2 — Headless Is the Bridge
+t3	34-runtime-part-3-the-managed-runtime.md	34-runtime-part-3-the-managed-runtime.md	Part 3 — The Managed Runtime
+t4	35-runtime-part-4-the-move-itself.md	35-runtime-part-4-the-move-itself.md	Part 4 — The Move Itself
+t5	36-runtime-parts-5-6-choosing-a-home.md	36-runtime-parts-5-6-choosing-a-home.md	Parts 5 + 6 — Choosing a home
+g1	37-web-agents-part-1-the-shift.md	37-web-agents-part-1-the-shift.md	Part 1 — The Shift
+g2	38-web-agents-part-2-the-surface.md	38-web-agents-part-2-the-surface.md	Part 2 — The Surface
+g3	39-web-agents-part-3-working-unwatched.md	39-web-agents-part-3-working-unwatched.md	Part 3 — Working Unwatched
+g4	40-web-agents-part-4-choosing-the-open-path.md	40-web-agents-part-4-choosing-the-open-path.md	Part 4 — Choosing + the Open Path
+g5	41-web-agents-the-7-appendices.md	41-web-agents-the-7-appendices.md	The 7 appendices
+a1	42-local-ai-agentic-coding.md	42-local-ai-agentic-coding.md	Local AI: Agentic Coding
+p1	43-build-the-question-bank.md	43-build-the-question-bank.md	Build the question bank
+p2	44-full-timed-mock-exam.md	44-full-timed-mock-exam.md	Full timed mock exam
+p3	45-marathon-weekends.md	45-marathon-weekends.md	Marathon weekends
+p4	46-final-revision-pass.md	46-final-revision-pass.md	Final revision pass
