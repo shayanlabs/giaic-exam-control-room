@@ -105,7 +105,13 @@
     box-shadow:0 20px 60px rgba(0,0,0,.5);}
   .note-modal-head{display:flex; align-items:center; justify-content:space-between; gap:12px;
     padding:14px 18px; border-bottom:1px solid var(--border-soft); flex:none;}
-  .note-modal-head span{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--gold); font-weight:700;}
+  .note-modal-head span{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--gold); font-weight:700; flex:1; min-width:0;}
+  .note-modal-head-btns{display:flex; align-items:center; gap:8px; flex:none;}
+  #noteModalCopy{background:var(--surface-2); border:1px solid var(--border); color:var(--text-dim);
+    height:26px; padding:0 10px; border-radius:6px; cursor:pointer; font-size:12px; flex:none;
+    font-family:'IBM Plex Mono',monospace; display:flex; align-items:center; gap:5px;}
+  #noteModalCopy:hover{color:var(--text); border-color:var(--text-faint);}
+  #noteModalCopy.copied{color:var(--teal); border-color:var(--teal);}
   #noteModalClose{background:var(--surface-2); border:1px solid var(--border); color:var(--text-dim);
     width:26px; height:26px; border-radius:6px; cursor:pointer; font-size:13px; flex:none;}
   #noteModalClose:hover{color:var(--text); border-color:var(--text-faint);}
@@ -203,7 +209,7 @@
 
   <div class="note-modal-overlay" id="noteOverlay">
     <div class="note-modal">
-      <div class="note-modal-head"><span id="noteModalTitle"></span><button id="noteModalClose">✕</button></div>
+      <div class="note-modal-head"><span id="noteModalTitle"></span><div class="note-modal-head-btns"><button id="noteModalCopy">⧉ Copy</button><button id="noteModalClose">✕</button></div></div>
       <div class="note-modal-body" id="noteModalBody"></div>
     </div>
   </div>
@@ -350,6 +356,26 @@ window.openNote=function(id,lang){
 };
 function closeNote(){ document.getElementById('noteOverlay').classList.remove('open'); }
 document.getElementById('noteModalClose').addEventListener('click', closeNote);
+document.getElementById('noteModalCopy').addEventListener('click', ()=>{
+  const btn = document.getElementById('noteModalCopy');
+  const title = document.getElementById('noteModalTitle').textContent;
+  const body = document.getElementById('noteModalBody').innerText;
+  const text = title + '\n\n' + body;
+  const done = ()=>{
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent = '⧉ Copy'; btn.classList.remove('copied'); }, 1400);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(()=>{
+      const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); document.body.removeChild(ta); done();
+    });
+  } else {
+    const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta); done();
+  }
+});
 document.getElementById('noteOverlay').addEventListener('click', e=>{
   if(e.target.id === 'noteOverlay') closeNote();
 });
